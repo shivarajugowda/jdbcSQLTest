@@ -1,0 +1,80 @@
+-- SQL Test Suite, V6.0, Schema Definition, schema2.std
+-- 59-byte ID
+-- TEd Version #
+-- date_time print
+-- ***************************************************************
+-- ****** THIS FILE SHOULD BE RUN UNDER AUTHORIZATION ID CUGINI
+-- ***************************************************************
+
+-- This is a standard schema definition.
+
+--     CREATE SCHEMA AUTHORIZATION CUGINI
+
+     DROP SCHEMA IF EXISTS CUGINI CASCADE
+
+     CREATE SCHEMA CUGINI
+
+     SET SCHEMA CUGINI
+
+--     GRANT SELECT,UPDATE ON HU.WORKS
+--           TO SULLIVAN
+
+      CREATE TABLE VTABLE
+            (COL1  INTEGER,
+             COL2  INTEGER,
+             COL3  INTEGER,
+             COL4  INTEGER,
+             COL5  DECIMAL(7,2))
+
+--     GRANT ALL PRIVILEGES ON VTABLE TO HU
+
+--  Test GRANT without grant permission below -- expect error message!
+--  "WITH GRANT OPTION" purposefully omitted from HU's GRANT on STAFF4.
+--  Do not change file SCHEMA1 to allow "WITH GRANT OPTION" on STAFF4.
+
+--     GRANT SELECT, INSERT, DELETE ON HU.STAFF4
+--           TO SCHANZLE
+
+
+  CREATE TABLE AA (CHARTEST     CHAR(20))
+
+  CREATE VIEW VAA AS SELECT * FROM AA
+
+  CREATE TABLE BB (CHARTEST     CHAR)
+
+  CREATE VIEW VBB AS SELECT * FROM BB
+
+  CREATE TABLE CC (CHARTEST     CHARACTER(20))
+
+  CREATE VIEW VCC AS SELECT * FROM CC
+
+  CREATE TABLE DD (CHARTEST     CHARACTER)
+
+  CREATE VIEW VDD AS SELECT * FROM DD
+
+  CREATE TABLE EE (INTTEST     INTEGER)
+
+  CREATE TABLE FF (INTTEST     INT)
+
+  CREATE TABLE GG (C1 INT)
+
+  CREATE TABLE HH (SMALLTEST  SMALLINT)
+
+  CREATE TABLE II (C1 INT)
+
+  CREATE VIEW VII AS SELECT * FROM II
+
+  CREATE TABLE JJ (C1 INT)
+
+  CREATE TABLE SRCH1 (C1 INT)
+
+  CREATE TABLE BADG1 (C1 INT)
+
+  CREATE TABLE BADG2 (C1 INT)
+
+  CREATE VIEW VBADG2 AS SELECT * FROM BADG2
+
+  CREATE VIEW VVTABLE AS SELECT * FROM VTABLE
+
+
+-- ************* End of Schema *************

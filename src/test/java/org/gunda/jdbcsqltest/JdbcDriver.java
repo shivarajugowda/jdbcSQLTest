@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 /**
  * Created by shivshi on 5/1/17.
@@ -12,18 +13,18 @@ public class JdbcDriver {
 
     Connection conn = null;
 
-    public JdbcDriver(Config config) {
-        conn = getConnection(config);
+    public JdbcDriver(Properties props) {
+        conn = getConnection(props);
     }
 
-    public static Connection getConnection(Config config) {
+    public static Connection getConnection(Properties props) {
 
-        String JDBC_DRIVER = config.getStringConfig(Config.JDBC_DRIVER_CLASSNAME);
-        String JDBC_DB_URL = config.getStringConfig(Config.JDBC_URL);
+        String JDBC_DRIVER = props.getProperty(Config.JDBC_DRIVER_CLASSNAME);
+        String JDBC_DB_URL = props.getProperty(Config.JDBC_URL);
 
         //  Database credentials
-        String USER = config.getStringConfig(Config.JDBC_USER);
-        String PASS = config.getStringConfig(Config.JDBC_PASSWORD);
+        String USER = props.getProperty(Config.JDBC_USER);
+        String PASS = props.getProperty(Config.JDBC_PASSWORD);
 
         Connection conn = null;
         try {
@@ -41,6 +42,11 @@ public class JdbcDriver {
         } catch (SQLException e) {
             // Ignore.
         }
+
+        return conn;
+    }
+
+    public Connection getConnection() {
         return conn;
     }
 
@@ -56,13 +62,8 @@ public class JdbcDriver {
         } catch (SQLException e) {
             throw new IllegalStateException("Cannot access database metadata " + e.getLocalizedMessage());
         } finally {
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException e) {
-                // ignore.
-            }
+
         }
-        System.out.println("Database Info Finished.");
+        System.out.println();
     }
 }

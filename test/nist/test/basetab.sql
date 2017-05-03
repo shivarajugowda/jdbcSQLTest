@@ -9,8 +9,9 @@
 
 -- AUTHORIZATION HU
 
-   SELECT USER FROM HU.ECCO;
+--   SELECT USER FROM HU.ECCO;
 -- RERUN if USER value does not match preceding AUTHORIZATION comment
+   SET SCHEMA HU
 
 -- date_time print
 
@@ -67,7 +68,7 @@
       DELETE FROM UPUNIQ;
 
       INSERT INTO STAFF3
-              SELECT * 
+              SELECT *
               FROM   STAFF;
 
       INSERT INTO VTABLE VALUES(10,+20,30,40,10.50);
