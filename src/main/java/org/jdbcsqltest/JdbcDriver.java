@@ -1,4 +1,4 @@
-package org.gunda.jdbcsqltest;
+package org.jdbcsqltest;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;

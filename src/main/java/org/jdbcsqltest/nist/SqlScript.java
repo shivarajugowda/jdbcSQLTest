@@ -1,6 +1,7 @@
-package org.gunda.jdbcsqltest;
+package org.jdbcsqltest.nist;
 
 import org.apache.commons.io.FileUtils;
+import org.jdbcsqltest.Script;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,14 +1,12 @@
-package org.gunda.jdbcsqltest;
+package org.jdbcsqltest.nist;
 
 import org.apache.commons.io.FileUtils;
+import org.jdbcsqltest.Script;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Created by shivshi on 5/2/17.

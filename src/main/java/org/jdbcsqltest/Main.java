@@ -1,13 +1,12 @@
-package org.gunda.jdbcsqltest;
+package org.jdbcsqltest;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
+import org.jdbcsqltest.nist.SchemaScript;
+import org.jdbcsqltest.nist.SqlScript;
+import org.jdbcsqltest.nist.TestExecutor;
 
 import java.io.File;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
 

@@ -1,4 +1,4 @@
-package org.gunda.jdbcsqltest;
+package org.jdbcsqltest;
 
 /**
  * Created by shivshi on 5/3/17.

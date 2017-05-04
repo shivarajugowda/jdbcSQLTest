@@ -1,4 +1,4 @@
-package org.gunda.jdbcsqltest;
+package org.jdbcsqltest;
 
 import java.io.BufferedReader;
 import java.io.File;

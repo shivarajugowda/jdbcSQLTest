@@ -1,8 +1,10 @@
-package org.gunda.jdbcsqltest;
+package org.jdbcsqltest.nist;
 
-import java.io.File;
+import org.jdbcsqltest.Config;
+import org.jdbcsqltest.JdbcDriver;
+import org.jdbcsqltest.Script;
+
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,13 +23,13 @@ public class TestExecutor {
     private float FLOATING_POINT_DELTA = 0.01f;
 
     // Pattern to validate : "-- PASS:0052 If CITY = 'Xi_an% ss' ?";
-    Pattern STRING_PATTERN = Pattern.compile("--\\s+PASS:(\\w+)\\s+if\\s+(\\w+)\\s+=\\s+'(.*)'\\s?\\?", Pattern.CASE_INSENSITIVE);
+    Pattern STRING_PATTERN = Pattern.compile("--\\s+PASS:(\\w+)\\s+if\\s+(\\S+)\\s+=\\s+'(.*)'\\s?\\?", Pattern.CASE_INSENSITIVE);
 
     // Pattern to validate : "-- PASS:0045 If PNUM = 20 ?" and "-- PASS:Setup if count = 6?"
-    Pattern NUM_PATTERN = Pattern.compile("--\\s+PASS:(\\w+)\\s+if\\s+(.*)\\s+=\\s+(\\w+)\\s?\\?", Pattern.CASE_INSENSITIVE);
+    Pattern NUM_PATTERN = Pattern.compile("--\\s+PASS:(\\w+)\\s+if\\s+(\\S*)\\s+=\\s+(\\w+)\\s?\\?", Pattern.CASE_INSENSITIVE);
 
     // Pattern to validate : "-- PASS:0052 If 1 row is inserted?"
-    Pattern NUM_ROWS_PATTERN = Pattern.compile("--\\s+PASS:(\\w+)\\s+if\\s+(\\w+)\\s+rows?\\s+[ia][sr]e?\\s+(\\w+).*\\?", Pattern.CASE_INSENSITIVE);
+    Pattern NUM_ROWS_PATTERN = Pattern.compile("--\\s+PASS:(\\w+)\\s+if\\s+(\\w+)\\s+rows?\\s+(?:is\\s+|are\\s+)?(\\w+).*\\?", Pattern.CASE_INSENSITIVE);
 
     private int ntests = 0, npassed = 0, nvalidated = 0;
 
@@ -53,9 +55,17 @@ public class TestExecutor {
             } else{
                 try {
                     stmt = jdbcDriver.getConnection().createStatement();
-                    rs = stmt.executeQuery(sql);
-                    if(validateResults(rs, script.getValidationClause()))
-                        nvalidated++;
+
+                    if(isDML(sql)) {
+                        int rows = stmt.executeUpdate(sql);
+                        if( validateResults(rows, script.getValidationClause()) )
+                            nvalidated++;
+                    } else {
+                        rs = stmt.executeQuery(sql);
+                        if (validateResults(rs, script.getValidationClause()))
+                            nvalidated++;
+                        rs.close();
+                    }
                     npassed++;
                 } catch (Exception e) {
                     System.out.println("Failed to execute sql : " + sql + "\n" + e.getLocalizedMessage());
@@ -76,6 +86,36 @@ public class TestExecutor {
                 "\t#Validated = " + nvalidated +
                 "\tTime(ms) " + (System.currentTimeMillis() - totalTimeStart));
 
+    }
+
+    private boolean isDML(String sql){
+        String lcsql = sql.toLowerCase().trim();
+        if( lcsql.startsWith("insert") ||
+                lcsql.startsWith("delete") ||
+                lcsql.startsWith("update") )
+            return true;
+        return false;
+    }
+
+    private boolean validateResults(int rows, String valClause) throws SQLException {
+        if (valClause == null || valClause.isEmpty())
+            return false;
+
+        Matcher macther = NUM_ROWS_PATTERN.matcher(valClause);
+        if (macther.find()) {
+            String testName = macther.group(1);
+            String numRows  = macther.group(2);
+            String oper     = macther.group(3);
+
+            if("INSERTED".equalsIgnoreCase(oper) || "DELETED".equalsIgnoreCase(oper)) {
+                if (!String.valueOf(rows).equals(numRows.trim()))
+                    throw new IllegalStateException("Validation failed for " + testName + ". Expected = " + numRows + "Actual = " + rows);
+                return true;
+            }
+        }
+
+        System.out.println("Unknown validation clause : " + valClause );
+        return  false;
     }
 
     private boolean validateResults(ResultSet rs, String valClause) throws SQLException {

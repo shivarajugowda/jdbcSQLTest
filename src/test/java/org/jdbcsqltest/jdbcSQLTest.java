@@ -1,14 +1,13 @@
-package org.gunda.jdbcsqltest;
+package org.jdbcsqltest;
 
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.Properties;
 
 /**
  * Created by shivshi on 5/2/17.
  */
-public class MavenTest {
+public class jdbcSQLTest {
 
     public static Properties getProperties(){
         Properties props = new Properties();
