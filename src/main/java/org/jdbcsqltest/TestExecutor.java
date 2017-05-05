@@ -58,7 +58,7 @@ public class TestExecutor {
                         nvalidated++;
                     npassed++;
                 } catch (Exception e) {
-                    System.out.println("Failed to execute sql : " + sql + "\n" + e.getLocalizedMessage());
+                    System.out.println("Failed to execute sql : " + sql + "\n" + e);
                     nfailed++;
                 } finally {
                     if (stmt != null)
