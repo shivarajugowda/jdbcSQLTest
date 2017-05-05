@@ -28,8 +28,10 @@ public class Config {
 
     // Test details.
     public static final String TEST_TYPE = "test.type";
-    public static final String TEST_TYPE_NIST = "test.type.nist";
     public static final String TEST_FOLDER = "test.folder";
+
+    public static final String TEST_TYPE_NIST = "test.type.nist";
+    public static final String TEST_TYPE_SQLLOGICTEST = "test.type.sqllogictest";
 
     // Queries
     public static final String QUERY_FILE = "query.file";

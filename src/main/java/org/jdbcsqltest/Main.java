@@ -4,7 +4,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.jdbcsqltest.nist.SchemaScript;
 import org.jdbcsqltest.nist.SqlScript;
-import org.jdbcsqltest.nist.TestExecutor;
+import org.jdbcsqltest.sqllogictest.SltScript;
 
 import java.io.File;
 import java.util.List;
@@ -13,11 +13,6 @@ import java.util.Properties;
 
 public class Main {
 
-    private static final String CONFIG_FILE = "config.file";
-    private static final String EXECUTE_QUERIES_ONLY = "execute.queries.only";
-    private static final String CLEAN_DB_ONLY = "clean.db.only";
-
-
     public static void Main(Properties props) throws Exception {
 
         long startTime = System.currentTimeMillis();
@@ -25,7 +20,20 @@ public class Main {
         JdbcDriver jdbcDriver = new JdbcDriver(props);
         jdbcDriver.printDBInfo();
 
+        String testType = props.getProperty(Config.TEST_TYPE);
+
+        if (Config.TEST_TYPE_NIST.equals(testType))
+            testNist(jdbcDriver, props);
+        else if (Config.TEST_TYPE_SQLLOGICTEST.equals(testType))
+            testSqlLogicTest(jdbcDriver, props);
+
+        jdbcDriver.getConnection().close();
+        System.out.println("\nTest ended, Total time taken = " + (System.currentTimeMillis() - startTime) + " ms ");
+    }
+
+    public static void testNist(JdbcDriver jdbcDriver, Properties props) throws Exception {
         File testFolder = new File(props.getProperty(Config.TEST_FOLDER));
+
 
         // Run Schema Scripts
         File schemaFolder = new File(testFolder, "schema");
@@ -44,8 +52,20 @@ public class Main {
             TestExecutor ex = new TestExecutor(jdbcDriver, script);
             ex.execute();
         }
+    }
 
-        System.out.println("\nTest ended, Total time taken = " + (System.currentTimeMillis() - startTime) + " ms ");
+    public static void testSqlLogicTest(JdbcDriver jdbcDriver, Properties props) throws Exception {
+        File testFolder = new File(props.getProperty(Config.TEST_FOLDER));
+
+        // Run SQL Scripts
+        List<File> files = (List<File>) FileUtils.listFiles(testFolder, TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE);
+        for (File file : files) {
+            jdbcDriver.clearSchema();
+            Script script = new SltScript(file);
+            TestExecutor ex = new TestExecutor(jdbcDriver, script);
+            ex.execute();
+
+        }
     }
 }
 

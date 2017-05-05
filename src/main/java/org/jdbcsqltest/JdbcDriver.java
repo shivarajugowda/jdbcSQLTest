@@ -1,9 +1,6 @@
 package org.jdbcsqltest;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Properties;
 
 /**
@@ -11,13 +8,14 @@ import java.util.Properties;
  */
 public class JdbcDriver {
 
-    Connection conn = null;
+    private Connection conn = null;
+    private static String SCHEMA_NAME = "testschema";
 
     public JdbcDriver(Properties props) {
         conn = getConnection(props);
     }
 
-    public static Connection getConnection(Properties props) {
+    private static Connection getConnection(Properties props) {
 
         String JDBC_DRIVER = props.getProperty(Config.JDBC_DRIVER_CLASSNAME);
         String JDBC_DB_URL = props.getProperty(Config.JDBC_URL);
@@ -29,7 +27,7 @@ public class JdbcDriver {
         Connection conn = null;
         try {
             Class.forName(JDBC_DRIVER);
-            conn =  DriverManager.getConnection(JDBC_DB_URL, USER, PASS);
+            conn = DriverManager.getConnection(JDBC_DB_URL, USER, PASS);
 
         } catch (ClassNotFoundException e) {
             throw new IllegalStateException("Could not load class " + e.getLocalizedMessage());
@@ -50,7 +48,18 @@ public class JdbcDriver {
         return conn;
     }
 
-    public  void printDBInfo() {
+    public void clearSchema() throws SQLException {
+        Statement stmt = conn.createStatement();
+        try {
+            stmt.executeUpdate("DROP SCHEMA " + SCHEMA_NAME + " CASCADE");
+        } catch (SQLException ex){
+            // Ignore if the schema does not exist.
+        }
+        stmt.executeUpdate("CREATE SCHEMA " + SCHEMA_NAME);
+        stmt.executeUpdate("SET SCHEMA " + SCHEMA_NAME);
+    }
+
+    public void printDBInfo() {
 
         System.out.println("\nDatabase Info.");
         try {

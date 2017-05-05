@@ -1,5 +1,8 @@
 package org.jdbcsqltest;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  * Created by shivshi on 5/3/17.
  */
@@ -18,11 +21,20 @@ public class Script {
         return null;
     }
 
-    public String getValidationClause() {
-        return null;
-    }
-
     public String getName(){
         return name;
+    }
+
+    public boolean validateResults(ResultSet rs, int nrows) throws SQLException {
+        return false;
+    }
+
+    public boolean isDML(String sql){
+        String lcsql = sql.toLowerCase().trim();
+        if( lcsql.startsWith("insert") ||
+                lcsql.startsWith("delete") ||
+                lcsql.startsWith("update") )
+            return true;
+        return false;
     }
 }
