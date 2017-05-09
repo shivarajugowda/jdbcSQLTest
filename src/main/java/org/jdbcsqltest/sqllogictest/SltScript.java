@@ -27,40 +27,62 @@ public class SltScript extends Script {
         NO_SORT, ROW_SORT, VALUE_SORT
     }
 
+    // Pattern to validate : "skipif postgresql # PostgreSQL"
+    Pattern SKIPP_IF_PATTERN = Pattern.compile("skipif\\s+(\\w+)\\s+.*");
+
     // Pattern to validate : "30 values hashing to 3c13dee48d9356ae19af2515e05e6b54";
     Pattern HASH_PATTERN = Pattern.compile("(\\d+).*hashing to (\\w+)", Pattern.CASE_INSENSITIVE);
 
-    public SltScript(File file) throws IOException {
-        super(file.getName());
+    public SltScript(String name, File file) throws IOException {
+        super(name);
         Scanner scanner = new Scanner(new BufferedReader(new FileReader(file)));
         scanner.useDelimiter("\\n\\s*[\\n]+");
 
         while (scanner.hasNext()) {
             String qblock = scanner.next();
+
+            // Handle DOS carriage return.
+            qblock = qblock.replaceAll("\r", "");
+
             if (qblock.trim().isEmpty())
                 continue;
 
-            if (qblock.startsWith("hash-threshold"))
+            String[] result = qblock.split("\n", 2);
+            String header = result[0];
+            qblock = result.length > 1 ? result[1] : null;
+
+            // Handle skipif and onlyif.
+            boolean skip = false;
+            while (header.startsWith("skipif") || header.startsWith("onlyif") ){
+
+                // Skipif
+                Matcher macther = SKIPP_IF_PATTERN.matcher(header);
+                if (macther.find()) {
+                    String dbType = macther.group(1).toLowerCase();
+                    if("postgresql".equalsIgnoreCase(dbType)) {
+                        skip = true;
+                    }
+                }
+
+                if(header.startsWith("onlyif")) {
+                    skip = true;
+                }
+
+                result = qblock.split("\n", 2);
+                header = result[0];
+                qblock = result.length > 1 ? result[1] : null;
+            }
+
+            if (skip || header.startsWith("hash-threshold"))
                 continue;
 
-            if (qblock.equalsIgnoreCase("halt"))
+            if (header.equalsIgnoreCase("halt"))
                 break;
 
-            String[] result = qblock.split(System.lineSeparator(), 2);
-
-            String header = result[0];
-            qblock = result[1];
-
-            // TODO: Ignore skipif and onlyif for now.
-            while (header.startsWith("skipif") || header.startsWith("onlyif")) {
-                result = qblock.split(System.lineSeparator(), 2);
-                header = result[0];
-                qblock = result[1];
-            }
 
             sortTypes.add(getSortType(header));
 
-            result = qblock.split("---*\\n", 2);
+            result = qblock.split("----*\\n", 2);
             sqls.add(result[0]);
 
             if (result.length > 1)
@@ -68,6 +90,7 @@ public class SltScript extends Script {
             else
                 validation.add(null);
         }
+        scanner.close();
     }
 
     private SORT_TYPE getSortType(String header) {
@@ -173,11 +196,11 @@ public class SltScript extends Script {
 
             String actHash = DigestUtils.md5Hex(result.toString());
             if (!(expValues == actValues))
-                throw new IllegalStateException("Validation failed for Expected Rows = " + expValues + " Actual Rows = " + actValues);
+                throw new IllegalStateException("Validation failed: \n Expected Rows = " + expValues + " Actual Rows = " + actValues);
 
             if (!hasNull) {
                 if (!hash.equals(actHash))
-                    throw new IllegalStateException("Validation failed for Expected hash = " + hash + " Actual hash = " + actHash);
+                    throw new IllegalStateException("Validation failed: \n Expected hash = " + hash + " Actual hash = " + actHash);
             }
 
             return true;
@@ -185,7 +208,7 @@ public class SltScript extends Script {
 
         // Else compare the ResultSet values.
         if (!(valClause + "\n").equals(result))
-            throw new IllegalStateException("Validation failed for \nExpected Rows =\n" + valClause + "\nActual Rows =\n" + result);
+            throw new IllegalStateException("Validation failed: \nExpected Rows =\n" + valClause + "\nActual Rows =\n" + result);
 
         return true;
     }

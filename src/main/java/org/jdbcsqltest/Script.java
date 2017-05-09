@@ -31,7 +31,9 @@ public class Script {
 
     public boolean isDML(String sql){
         String lcsql = sql.toLowerCase().trim();
-        if( lcsql.startsWith("insert") ||
+        if( lcsql.startsWith("create") ||
+                lcsql.startsWith("drop") ||
+                lcsql.startsWith("insert") ||
                 lcsql.startsWith("delete") ||
                 lcsql.startsWith("update") )
             return true;

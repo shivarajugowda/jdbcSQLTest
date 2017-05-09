@@ -17,6 +17,10 @@ public class Config {
     // Database
     public static final String DATABASE = "DATABASE";
 
+    public static final String DATABASE_HSQLDB = "HSQLDB";
+    public static final String DATABASE_PGSQL  = "PostgreSQL";
+    public static final String DATABASE_CIS    = "CIS";
+
     // The remaining properties come from config file.
     public static final String DATA_DIR = "data.dir";
 
@@ -32,6 +36,7 @@ public class Config {
 
     public static final String TEST_TYPE_NIST = "test.type.nist";
     public static final String TEST_TYPE_SQLLOGICTEST = "test.type.sqllogictest";
+    public static final String TEST_TYPE_FOODMART = "test.type.foodmart";
 
     // Queries
     public static final String QUERY_FILE = "query.file";

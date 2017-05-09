@@ -9,12 +9,19 @@ import java.util.Properties;
 public class JdbcDriver {
 
     private Connection conn = null;
+    private String dbType;
     private static String SCHEMA_NAME = "testschema";
+    private Properties props;
 
     public JdbcDriver(Properties props) {
+        this.props = props;
         conn = getConnection(props);
+        dbType = props.getProperty(Config.DATABASE);
     }
 
+    public Connection getNewConnection() {
+        return getConnection(props);
+    }
     private static Connection getConnection(Properties props) {
 
         String JDBC_DRIVER = props.getProperty(Config.JDBC_DRIVER_CLASSNAME);
@@ -35,12 +42,13 @@ public class JdbcDriver {
             throw new IllegalStateException("Could not connect " + e.getLocalizedMessage());
         }
 
+        /*
         try {
             conn.setAutoCommit(false);
         } catch (SQLException e) {
             // Ignore.
         }
-
+          */
         return conn;
     }
 
@@ -49,6 +57,10 @@ public class JdbcDriver {
     }
 
     public void clearSchema() throws SQLException {
+
+        if(Config.DATABASE_CIS.equals(dbType))
+            return;
+
         Statement stmt = conn.createStatement();
         try {
             stmt.executeUpdate("DROP SCHEMA " + SCHEMA_NAME + " CASCADE");
@@ -56,7 +68,11 @@ public class JdbcDriver {
             // Ignore if the schema does not exist.
         }
         stmt.executeUpdate("CREATE SCHEMA " + SCHEMA_NAME);
-        stmt.executeUpdate("SET SCHEMA " + SCHEMA_NAME);
+
+        if(Config.DATABASE_HSQLDB.equals(dbType))
+            stmt.executeUpdate("SET SCHEMA " + SCHEMA_NAME);
+        else if (Config.DATABASE_PGSQL.equals(dbType))
+            stmt.executeUpdate("SET SCHEMA '" + SCHEMA_NAME + "'");
     }
 
     public void printDBInfo() {

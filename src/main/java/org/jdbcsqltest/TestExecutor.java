@@ -5,6 +5,7 @@ import org.jdbcsqltest.JdbcDriver;
 import org.jdbcsqltest.Script;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -34,6 +35,7 @@ public class TestExecutor {
         long totalTimeStart = System.currentTimeMillis();;
 
         String sql = script.getNextSQLCommand();
+        Connection conn = jdbcDriver.getConnection();
 
         while ( sql != null) {
             long startTime = System.currentTimeMillis();
@@ -41,12 +43,12 @@ public class TestExecutor {
             Statement stmt = null;
             ResultSet rs = null;
             if(sql.startsWith("COMMIT")){
-                jdbcDriver.getConnection().commit();
+                conn.commit();
             } else if (sql.startsWith("ROLLBACK") ) {
-                jdbcDriver.getConnection().rollback();
+                conn.rollback();
             } else{
                 try {
-                    stmt = jdbcDriver.getConnection().createStatement();
+                    stmt = conn.createStatement();
 
                     int nrows = 0;
                     if(script.isDML(sql)) {
@@ -57,9 +59,14 @@ public class TestExecutor {
                     if (script.validateResults(rs, nrows))
                         nvalidated++;
                     npassed++;
-                } catch (Exception e) {
-                    System.out.println("Failed to execute sql : " + sql + "\n" + e);
+
+                    if(rs != null)
+                        rs.close();
+                } catch (Throwable e) {
                     nfailed++;
+                    System.out.println("Failed to execute sql : " + sql + "\n" + e);
+                    System.exit(1);
+                    break;
                 } finally {
                     if (stmt != null)
                         try {
@@ -71,12 +78,14 @@ public class TestExecutor {
 
             sql = script.getNextSQLCommand();
         }
-        System.out.println( script.getName() + "\t: " +
-                "\t#Tests = " + ntests +
-                "\t#Passed = " + npassed +
-                "\t#Failed = " + nfailed +
-                "\t#Validated = " + nvalidated +
-                "\tTime(ms) " + (System.currentTimeMillis() - totalTimeStart));
+        System.out.format("%-35s %1s %-15s %-15s %-15s %-20s %-15s \n",
+                script.getName(),
+                ":",
+                "#Tests = " + ntests,
+                "#Passed = " + npassed,
+                "#Failed = " + nfailed,
+                "#Validated = " + nvalidated,
+                "Time(ms) " + (System.currentTimeMillis() - totalTimeStart));
 
     }
 
