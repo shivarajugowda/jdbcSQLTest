@@ -34,9 +34,9 @@ public class SchemaScript extends Script {
             sqls.add(sql);
     }
 
-    public String getNextSQLCommand(){
+    public SqlCommand getNextSQLCommand(){
         if(currentPtr < sqls.size())
-            return sqls.get(currentPtr++);
+            return new SqlCommand(String.valueOf(currentPtr), sqls.get(currentPtr++));
 
         return null;
     }

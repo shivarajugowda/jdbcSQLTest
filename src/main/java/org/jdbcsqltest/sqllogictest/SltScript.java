@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -102,9 +101,9 @@ public class SltScript extends Script {
             return SORT_TYPE.NO_SORT;
     }
 
-    public String getNextSQLCommand() {
+    public SqlCommand getNextSQLCommand() {
         if (nextPtr < sqls.size())
-            return sqls.get(nextPtr++);
+            return new SqlCommand(String.valueOf(nextPtr), sqls.get(nextPtr++));
 
         return null;
     }
@@ -117,7 +116,7 @@ public class SltScript extends Script {
         return sortTypes.get(nextPtr - 1);
     }
 
-    public boolean validateResults(ResultSet rs, int nrows) throws SQLException {
+    public boolean validateResults(ResultSet rs, int nrows) throws Exception {
         String valClause = this.getValidationClause();
         if (valClause == null || valClause.isEmpty())
             return false;

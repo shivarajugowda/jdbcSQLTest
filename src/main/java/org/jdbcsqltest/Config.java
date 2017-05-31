@@ -37,6 +37,10 @@ public class Config {
     public static final String TEST_TYPE_NIST = "test.type.nist";
     public static final String TEST_TYPE_SQLLOGICTEST = "test.type.sqllogictest";
     public static final String TEST_TYPE_FOODMART = "test.type.foodmart";
+    public static final String TEST_TYPE_TPCH = "test.type.tpch";
+    public static final String TEST_TYPE_TPCDS = "test.type.tpcds";
+
+    public static final String POPULATE_SCHEMA = "populate.schema";  // Should populate schema, default true.
 
     // Queries
     public static final String QUERY_FILE = "query.file";

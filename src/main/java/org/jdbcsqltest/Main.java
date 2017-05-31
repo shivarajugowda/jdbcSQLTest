@@ -3,11 +3,17 @@ package org.jdbcsqltest;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 //import org.jdbcsqltest.foodmart.FoodmartScript;
+import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.jdbcsqltest.foodmart.FoodmartSchemaScript;
 import org.jdbcsqltest.foodmart.FoodmartSqlScript;
 import org.jdbcsqltest.nist.SchemaScript;
 import org.jdbcsqltest.nist.SqlScript;
 import org.jdbcsqltest.sqllogictest.SltScript;
+import org.jdbcsqltest.tpcds.TpcdsPopulateData;
+import org.jdbcsqltest.tpcds.TpcdsScript;
+import org.jdbcsqltest.tpcds.TpcdsScript_bak;
+import org.jdbcsqltest.tpch.TpchPopulateData;
+import org.jdbcsqltest.tpch.TpchScript;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -32,6 +38,10 @@ public class Main {
             testSqlLogicTest(jdbcDriver, props);
         else if (Config.TEST_TYPE_FOODMART.equals(testType))
             testFoodmart(jdbcDriver, props);
+        else if (Config.TEST_TYPE_TPCH.equals(testType))
+            testTPCH(jdbcDriver, props);
+        else if (Config.TEST_TYPE_TPCDS.equals(testType))
+            testTPCDS(jdbcDriver, props);
 
         jdbcDriver.getConnection().close();
         System.out.println("\nTest ended, Total time taken = " + (System.currentTimeMillis() - startTime) + " ms ");
@@ -85,20 +95,91 @@ public class Main {
     public static void testFoodmart(JdbcDriver jdbcDriver, Properties props) throws Exception {
         File testFolder = new File(props.getProperty(Config.TEST_FOLDER));
 
-        // Clear database.
-        jdbcDriver.clearSchema();
 
         // Run Schema Scripts
-        File schemaFile = new File(testFolder, "foodmart.script.zip");
-        Script script = new FoodmartSchemaScript(schemaFile);
-        TestExecutor ex = new TestExecutor(jdbcDriver, script);
-        ex.execute();
+        Boolean popSchema = (Boolean)props.get(Config.POPULATE_SCHEMA);
+        popSchema = popSchema == null ? true : popSchema; // default true.
+        if(popSchema) {
+            jdbcDriver.clearSchema();  // Clear database.
+            File schemaFile = new File(testFolder, "foodmart.script.zip");
+            Script script = new FoodmartSchemaScript(schemaFile);
+            TestExecutor ex = new TestExecutor(jdbcDriver, script);
+            ex.execute();
+            jdbcDriver.getConnection().commit();
+        }
 
         // Run SQL Scripts
         File sqlFile = new File(testFolder, "queries.json.zip");
-        script = new FoodmartSqlScript(sqlFile);
-        ex = new TestExecutor(jdbcDriver, script);
+        Script sqlScript = new FoodmartSqlScript(sqlFile);
+        TestExecutor exsql = new TestExecutor(jdbcDriver, sqlScript);
+        exsql.execute();
+    }
+
+    public static void testTPCH(JdbcDriver jdbcDriver, Properties props) throws Exception {
+        File testFolder = new File(props.getProperty(Config.TEST_FOLDER));
+
+        // Run Schema Scripts
+        Boolean popSchema = (Boolean)props.get(Config.POPULATE_SCHEMA);
+        popSchema = popSchema == null ? true : popSchema; // default true.
+        if(popSchema) {
+            jdbcDriver.clearSchema();  // Clear database.
+            File schemaFolder = new File(testFolder, "schema");
+            List<File> files = (List<File>) FileUtils.listFiles(schemaFolder, TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE);
+            for (File file : files) {
+                Script script = new SchemaScript(file);
+                TestExecutor ex = new TestExecutor(jdbcDriver, script);
+                ex.execute();
+            }
+            TpchPopulateData ex = new TpchPopulateData(jdbcDriver);
+            ex.execute();
+        }
+
+        // Run SQL Scripts
+        File sqlFolder = new File(testFolder, "test");
+        List<File> files = (List<File>) FileUtils.listFiles(sqlFolder, new WildcardFileFilter("*.sql"), TrueFileFilter.INSTANCE);
+        for (File file : files) {
+            TpchScript script = new TpchScript(file);
+            TestExecutor ex = new TestExecutor(jdbcDriver, script);
+            ex.execute();
+        }
+
+    }
+
+    public static void testTPCDS(JdbcDriver jdbcDriver, Properties props) throws Exception {
+        File testFolder = new File(props.getProperty(Config.TEST_FOLDER));
+
+        // Run Schema Scripts
+        Boolean popSchema = (Boolean)props.get(Config.POPULATE_SCHEMA);
+        popSchema = popSchema == null ? true : popSchema; // default true.
+        if(popSchema) {
+            jdbcDriver.clearSchema();  // Clear database.
+            File schemaFolder = new File(testFolder, "schema");
+            List<File> files = (List<File>) FileUtils.listFiles(schemaFolder, new WildcardFileFilter("*.sql"), TrueFileFilter.INSTANCE);
+            for (File file : files) {
+                Script script = new SchemaScript(file);
+                TestExecutor ex = new TestExecutor(jdbcDriver, script);
+                ex.execute();
+            }
+            TpcdsPopulateData ex = new TpcdsPopulateData(jdbcDriver);
+            ex.execute();
+        }
+
+        // Run SQL Scripts
+
+        File sqlFolder = new File(testFolder, "test");
+        List<File> files = (List<File>) FileUtils.listFiles(sqlFolder, new WildcardFileFilter("*.sql"), TrueFileFilter.INSTANCE);
+        for (File file : files) {
+            System.out.println("Working on " + file.getName());
+            TpcdsScript script = new TpcdsScript(file);
+            TestExecutor ex = new TestExecutor(jdbcDriver, script);
+            ex.execute();
+        }
+
+        /*
+        TpcdsScript_bak script = new TpcdsScript_bak("TPCDS");
+        TestExecutor ex = new TestExecutor(jdbcDriver, script);
         ex.execute();
+        */
     }
 }
 

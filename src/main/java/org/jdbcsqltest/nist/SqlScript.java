@@ -6,7 +6,6 @@ import org.jdbcsqltest.Script;
 import java.io.File;
 import java.io.IOException;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -62,9 +61,9 @@ public class SqlScript extends Script {
         return lines.get(lineNo+1).trim().startsWith("-- PASS");
     }
 
-    public String getNextSQLCommand(){
+    public SqlCommand getNextSQLCommand(){
         if(nextPtr < sqls.size())
-            return sqls.get(nextPtr++);
+            return new SqlCommand(String.valueOf(nextPtr), sqls.get(nextPtr++));
 
         return null;
     }
@@ -73,7 +72,7 @@ public class SqlScript extends Script {
         return validation.get(nextPtr - 1);
     }
 
-    public boolean validateResults(ResultSet rs, int nrows) throws SQLException {
+    public boolean validateResults(ResultSet rs, int nrows) throws Exception {
         String valClause = this.getValidationClause();
         if(valClause == null || valClause.isEmpty())
             return false;

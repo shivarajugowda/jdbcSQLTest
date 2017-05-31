@@ -13,16 +13,16 @@ public class JdbcDriver {
     private static String SCHEMA_NAME = "testschema";
     private Properties props;
 
-    public JdbcDriver(Properties props) {
+    public JdbcDriver(Properties props) throws SQLException {
         this.props = props;
-        conn = getConnection(props);
         dbType = props.getProperty(Config.DATABASE);
+        conn = getConnection(props);
     }
 
-    public Connection getNewConnection() {
+    public Connection getNewConnection() throws SQLException {
         return getConnection(props);
     }
-    private static Connection getConnection(Properties props) {
+    private Connection getConnection(Properties props) throws SQLException {
 
         String JDBC_DRIVER = props.getProperty(Config.JDBC_DRIVER_CLASSNAME);
         String JDBC_DB_URL = props.getProperty(Config.JDBC_URL);
@@ -35,25 +35,41 @@ public class JdbcDriver {
         try {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(JDBC_DB_URL, USER, PASS);
-
+            //conn.setAutoCommit(false);
         } catch (ClassNotFoundException e) {
             throw new IllegalStateException("Could not load class " + e.getLocalizedMessage());
         } catch (SQLException e) {
             throw new IllegalStateException("Could not connect " + e.getLocalizedMessage());
         }
 
-        /*
-        try {
-            conn.setAutoCommit(false);
-        } catch (SQLException e) {
-            // Ignore.
-        }
-          */
+        setSchema(conn);
         return conn;
     }
 
     public Connection getConnection() {
         return conn;
+    }
+
+    public String getSchema() throws SQLException {
+
+        if (Config.DATABASE_CIS.equals(dbType))
+            return null;
+
+        return SCHEMA_NAME;
+    }
+    private void setSchema(Connection connection) throws SQLException {
+
+        if (Config.DATABASE_CIS.equals(dbType))
+            return;
+
+        Statement stmt = connection.createStatement();
+
+        if(Config.DATABASE_HSQLDB.equals(dbType))
+            stmt.executeUpdate("SET SCHEMA " + SCHEMA_NAME);
+        else if (Config.DATABASE_PGSQL.equals(dbType))
+            stmt.executeUpdate("SET SCHEMA '" + SCHEMA_NAME + "'");
+
+        stmt.close();
     }
 
     public void clearSchema() throws SQLException {
@@ -68,11 +84,9 @@ public class JdbcDriver {
             // Ignore if the schema does not exist.
         }
         stmt.executeUpdate("CREATE SCHEMA " + SCHEMA_NAME);
+        stmt.close();
 
-        if(Config.DATABASE_HSQLDB.equals(dbType))
-            stmt.executeUpdate("SET SCHEMA " + SCHEMA_NAME);
-        else if (Config.DATABASE_PGSQL.equals(dbType))
-            stmt.executeUpdate("SET SCHEMA '" + SCHEMA_NAME + "'");
+        setSchema(conn);
     }
 
     public void printDBInfo() {

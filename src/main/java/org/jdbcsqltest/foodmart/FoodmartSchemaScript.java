@@ -37,9 +37,9 @@ public class FoodmartSchemaScript extends Script {
         }
     }
 
-    public String getNextSQLCommand(){
+    public SqlCommand getNextSQLCommand(){
         if(currentPtr < sqls.size())
-            return sqls.get(currentPtr++);
+            return new SqlCommand(String.valueOf(currentPtr), sqls.get(currentPtr++));
 
         return null;
     }
