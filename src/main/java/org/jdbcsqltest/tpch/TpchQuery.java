@@ -37,7 +37,7 @@ public class TpchQuery extends Script {
     public boolean validateResults(ResultSet rs, int nrows) throws Exception {
     	
     	/*
-    	if("q17.sql".equalsIgnoreCase(name)) {
+    	if("q15.sql".equalsIgnoreCase(name)) {
     		writeResults(resultFile, rs);
     		if(1==1)
     			return false;

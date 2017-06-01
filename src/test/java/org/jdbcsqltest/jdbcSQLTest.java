@@ -43,8 +43,7 @@ public class jdbcSQLTest {
         props.put(Config.JDBC_URL,               "jdbc:postgresql://localhost:15432/TPCH");
         props.put(Config.JDBC_USER,              "user1");
         props.put(Config.JDBC_PASSWORD,          "user1");
-        */
-
+         */
         return props;
     }
 
