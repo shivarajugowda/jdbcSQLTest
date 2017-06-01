@@ -1,10 +1,15 @@
 package org.jdbcsqltest;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.filefilter.TrueFileFilter;
+import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.junit.Test;
 import org.junit.Ignore;
 
 import java.io.File;
+import java.util.Collection;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -95,8 +100,26 @@ public class jdbcSQLTest {
         // Test type.
         props.put(Config.TEST_TYPE,   Config.TEST_TYPE_TPCDS);
         props.put(Config.TEST_FOLDER, "./test/tpcds");
+        props.put(Config.SCALE_FACTOR, Config.SCALE_FACTOR_1);
         props.put(Config.POPULATE_SCHEMA, false);
 
         Main.Main(props);
     }
+
+    /*
+    @Test
+    public void temp() throws Exception {
+
+        File testFolder = new File("./test/tpcds/test/answers_SF_1");
+        Collection<File> files = FileUtils.listFiles(testFolder, new WildcardFileFilter("*.ans"), TrueFileFilter.INSTANCE);
+
+        // Test type.
+        for (File file : files) {
+
+            String newname = "q" + file.getName();
+            System.out.println("Working on " + file.getName() + " new name = " + newname);
+            FileUtils.moveFile(file, new File(file.getParentFile(), newname));
+        }
+    }
+    */
 }

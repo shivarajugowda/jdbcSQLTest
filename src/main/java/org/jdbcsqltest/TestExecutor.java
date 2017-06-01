@@ -59,12 +59,12 @@ public class TestExecutor {
                     if(rs != null)
                         rs.close();
 
-                    System.out.println("Passed " + cmd.name + ", Time taken : " + (System.currentTimeMillis() - queryStartTime));
+                    //System.out.println("Passed " + cmd.name + ", Time taken : " + (System.currentTimeMillis() - queryStartTime));
                 } catch (Throwable e) {
                     nfailed++;
                     System.out.println("Failed to execute id = " + cmd.name + ", sql = " + cmd.sql + "\n" + e);
                     failedCases.append(cmd.name).append(",");
-                    //System.exit(1);
+                    System.exit(1);
                     //break;
                 } finally {
                     if (stmt != null)

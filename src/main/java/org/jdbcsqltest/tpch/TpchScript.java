@@ -57,7 +57,7 @@ public class TpchScript extends Script {
             if (resultMatchError == null) {
                 String[] tokens = s.split("\\|");
                 for (int i = 0; i < rsmeta.getColumnCount(); i++) {
-                    if (!checkResult(rsmeta.getColumnType(i + 1), rs.getString(i + 1), tokens[i])) {
+                    if (!checkResult(rsmeta.getColumnType(i + 1), rs.getString(i + 1), tokens[i], FLOATING_POINT_DELTA)) {
                         resultMatchError = "Column " + rsmeta.getColumnName(i + 1) + ". DataType " + rsmeta.getColumnTypeName(i + 1) + " " + rsmeta.getColumnType(i + 1) + ". Value " + rs.getString(i + 1) + " != " + tokens[i].trim();
                         break;
                     }
@@ -74,33 +74,6 @@ public class TpchScript extends Script {
             throw new IllegalStateException("Result validation : Number of Rows match but some values don't match : " + resultMatchError);
         dataReader.close();
         return true;
-    }
-
-    private boolean checkResult(int type, String expected, String actual) {
-        boolean resultsMatch = false;
-
-        // Check null condition, actual is always not null because of string.split().
-        if(expected == null && actual.isEmpty())
-            return true;
-        else if (expected == null && ! actual.isEmpty() )
-            return false;
-
-        switch(type){
-            case Types.DECIMAL:
-            case Types.NUMERIC:
-            case Types.REAL:
-            case Types.DOUBLE:
-            case Types.FLOAT:
-                Double dblExp = new Double(expected);
-                Double dblAct = new Double(actual);
-                resultsMatch = Math.abs(dblExp - dblAct) < FLOATING_POINT_DELTA;
-                break;
-            default:
-                resultsMatch = expected.trim().equals(actual.trim());
-
-        }
-
-        return resultsMatch;
     }
 
 }

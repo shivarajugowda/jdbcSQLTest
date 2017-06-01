@@ -28,7 +28,6 @@ public class TpcdsScript_bak extends Script {
     public TpcdsScript_bak(String name) throws Exception{
         super(name);
         queries = Query.values();
-
         /*
         File file = new File("tpcds.queries");
         for(Query query: queries){
@@ -43,8 +42,6 @@ public class TpcdsScript_bak extends Script {
         while(sqlCommand != null && DISABLED_IDS_SET.contains(sqlCommand.name)){
             sqlCommand = getNextSQLCommandInt();
         }
-        if(sqlCommand != null)
-            System.out.println("Working on " + sqlCommand.name);
         return sqlCommand;
     }
 

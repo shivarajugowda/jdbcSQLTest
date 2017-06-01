@@ -1,6 +1,6 @@
 --q98.sql--
 
-select i_item_desc, i_category, i_class, i_current_price
+select i_item_id, i_item_desc, i_category, i_class, i_current_price
       ,sum(ss_ext_sales_price) as itemrevenue
       ,sum(ss_ext_sales_price)*100/sum(sum(ss_ext_sales_price)) over
           (partition by i_class) as revenueratio

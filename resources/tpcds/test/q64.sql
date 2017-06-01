@@ -56,5 +56,5 @@
       cs2.cnt <= cs1.cnt and
       cs1.store_name = cs2.store_name and
       cs1.store_zip = cs2.store_zip
- order by cs1.product_name, cs1.store_name, cs2.cnt
+ order by cs1.product_name, cs1.store_name, cs2.cnt, b_city
             

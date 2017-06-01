@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class TpcdsPopulateData {
     private int BATCH_SIZE = 1000;
-    private int TPCH_SCALE_FACTOR = 1;
+    private int SCALE_FACTOR = 1;
     JdbcDriver conn;
 
     public TpcdsPopulateData(JdbcDriver conn) {
@@ -52,7 +52,7 @@ public class TpcdsPopulateData {
 
         PreparedStatement pstmt = conn.getConnection().prepareStatement(sb.toString());
 
-        Session session = Session.getDefaultSession().withTable(tpcdsTable).withScale(TPCH_SCALE_FACTOR);
+        Session session = Session.getDefaultSession().withTable(tpcdsTable).withScale(SCALE_FACTOR);
         Results results = Results.constructResults(tpcdsTable, session);
         Iterator res = results.iterator();
         long nrows = 0;

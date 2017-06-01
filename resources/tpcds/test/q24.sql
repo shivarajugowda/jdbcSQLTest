@@ -1,4 +1,4 @@
---q24a.sql--
+--q24.sql--
 
  with ssales as
  (select c_last_name, c_first_name, s_store_name, ca_state, s_state, i_color,
@@ -19,4 +19,5 @@
  where i_color = 'pale'
  group by c_last_name, c_first_name, s_store_name
  having sum(netpaid) > (select 0.05*avg(netpaid) from ssales)
+ order by c_last_name 
             

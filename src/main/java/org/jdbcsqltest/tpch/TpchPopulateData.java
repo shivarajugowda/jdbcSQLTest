@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class TpchPopulateData {
     private int BATCH_SIZE = 1000;
-    private double TPCH_SCALE_FACTOR = 1.0;
+    private double SCALE_FACTOR = 1.0;
     JdbcDriver conn;
 
 
@@ -50,7 +50,7 @@ public class TpchPopulateData {
         PreparedStatement pstmt = conn.getConnection().prepareStatement(sb.toString());
 
         long nrows = 0;
-        for (E row : tpchTable.createGenerator(TPCH_SCALE_FACTOR, 1, 1)) {
+        for (E row : tpchTable.createGenerator(SCALE_FACTOR, 1, 1)) {
             for (int i = 0; i < columns.size(); i++) {
                 TpchColumn<E> column = columns.get(i);
                 switch(column.getType().getBase()) {

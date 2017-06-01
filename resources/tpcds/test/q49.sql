@@ -93,6 +93,6 @@
  	) in_store
  ) store
  where (store.return_rank <= 10 or store.currency_rank <= 10)
- order by 1,4,5
+ order by 1,4,5,2
  limit 100
             

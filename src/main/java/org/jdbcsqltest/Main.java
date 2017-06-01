@@ -165,12 +165,14 @@ public class Main {
         }
 
         // Run SQL Scripts
+        String sf = props.getProperty(Config.SCALE_FACTOR);
+        sf = sf == null ? Config.SCALE_FACTOR_1 : sf;
 
         File sqlFolder = new File(testFolder, "test");
         List<File> files = (List<File>) FileUtils.listFiles(sqlFolder, new WildcardFileFilter("*.sql"), TrueFileFilter.INSTANCE);
         for (File file : files) {
-            System.out.println("Working on " + file.getName());
-            TpcdsScript script = new TpcdsScript(file);
+            //System.out.println("Working on " + file.getName());
+            TpcdsScript script = new TpcdsScript(file, sf);
             TestExecutor ex = new TestExecutor(jdbcDriver, script);
             ex.execute();
         }

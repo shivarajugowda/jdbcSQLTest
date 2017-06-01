@@ -48,6 +48,11 @@ public class Config {
     public static final String QUERY_RESULT_CHECK_FP_DELTA = "query.resultCheck.FP.delta";
     private static Config instance = null;
 
+    // SCALE_FACTOR for TPCH and TPC-DS tests
+    public static final String SCALE_FACTOR = "SF";
+    public static final String SCALE_FACTOR_1 = "SF_1";
+    public static final String SCALE_FACTOR_0_01 = "SF_0_01";
+
     private Properties props;
 
     protected Config(String path) {
