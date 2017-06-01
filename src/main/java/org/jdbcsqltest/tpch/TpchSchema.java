@@ -11,11 +11,11 @@ import java.util.zip.ZipInputStream;
 /**
  * Created by shivshi on 5/2/17.
  */
-public class TpchSchemaScript extends Script {
+public class TpchSchema extends Script {
     public int currentPtr = 0;
     List<String> sqls = new ArrayList<String>();
 
-    public TpchSchemaScript(File file) throws IOException {
+    public TpchSchema(File file) throws IOException {
         super(file.getName());
 
         Scanner sc = new Scanner(new BufferedReader(new FileReader(file)));

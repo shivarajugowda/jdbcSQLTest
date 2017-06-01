@@ -1,9 +1,0 @@
-
-Modifications to the queries.
-
-1) q24: Added "order by c_last_name" to expect results in sorted order.
-2) q49: Change "order by 1,4,5" to "order by 1,4,5,2"
-3) q56: Change "order by total_sales" to "order by total_sales, i_item_id"
-4) q64: Added b_city to the order by clause.
-5) q75: Added i_brand_id to the order by clause.
-6) q98: Added i_item_id to the select list to be consistent with the group by clause.

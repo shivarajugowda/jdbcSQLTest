@@ -14,13 +14,13 @@ import java.sql.Types;
 /**
  * Created by shivshi on 5/24/17.
  */
-public class TpchScript extends Script {
+public class TpchQuery extends Script {
     private float FLOATING_POINT_DELTA = 0.05f;
     public String sql;
     private File resultFile;
     int nextPtr = 0;
 
-    public TpchScript(File file, String sf) throws Exception {
+    public TpchQuery(File file, String sf) throws Exception {
         super(file.getName());
         sql = FileUtils.readFileToString(file, "UTF-8");
         resultFile = getResultFile(file, sf); 

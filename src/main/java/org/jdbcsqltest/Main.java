@@ -13,7 +13,7 @@ import org.jdbcsqltest.tpcds.TpcdsPopulateData;
 import org.jdbcsqltest.tpcds.TpcdsScript;
 import org.jdbcsqltest.tpcds.TpcdsScript_bak;
 import org.jdbcsqltest.tpch.TpchPopulateData;
-import org.jdbcsqltest.tpch.TpchScript;
+import org.jdbcsqltest.tpch.TpchQuery;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -147,7 +147,7 @@ public class Main {
         File sqlFolder = new File(testFolder, "queries");
         List<File> files = (List<File>) FileUtils.listFiles(sqlFolder, new WildcardFileFilter("*.sql"), TrueFileFilter.INSTANCE);
         for (File file : files) {
-            TpchScript script = new TpchScript(file, sf);
+            TpchQuery script = new TpchQuery(file, sf);
             TestExecutor ex = new TestExecutor(jdbcDriver, script);
             ex.execute();
         }
