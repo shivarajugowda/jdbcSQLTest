@@ -35,6 +35,15 @@ public class TpchQuery extends Script {
     }
 
     public boolean validateResults(ResultSet rs, int nrows) throws Exception {
+    	
+    	/*
+    	if("q17.sql".equalsIgnoreCase(name)) {
+    		writeResults(resultFile, rs);
+    		if(1==1)
+    			return false;
+    	}
+    	*/
+    	
         if (nextPtr > 1 || !resultFile.exists())
             return false;
 
@@ -50,7 +59,7 @@ public class TpchQuery extends Script {
 
         while (rs.next()) {
             s = dataReader.readLine();
-            if (s == null || s.trim().isEmpty()) {
+            if (s == null) {
                 throw new IllegalStateException("Result validation : FAILED. Number of Actual Rows  more than Expected rows");
             }
 

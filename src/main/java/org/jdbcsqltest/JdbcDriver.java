@@ -17,6 +17,12 @@ public class JdbcDriver {
         this.props = props;
         dbType = props.getProperty(Config.DATABASE);
         conn = getConnection(props);
+        
+        // For HSQLDB we clear the schema all the time since it is embedded.
+        if(Config.DATABASE_HSQLDB.equals(dbType))
+        	clearSchema();
+        
+        setSchema(conn);
     }
 
     public Connection getNewConnection() throws SQLException {
@@ -42,7 +48,6 @@ public class JdbcDriver {
             throw new IllegalStateException("Could not connect " + e.getLocalizedMessage());
         }
 
-        setSchema(conn);
         return conn;
     }
 
@@ -86,7 +91,6 @@ public class JdbcDriver {
         stmt.executeUpdate("CREATE SCHEMA " + SCHEMA_NAME);
         stmt.close();
 
-        setSchema(conn);
     }
 
     public void printDBInfo() {

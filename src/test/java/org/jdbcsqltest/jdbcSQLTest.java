@@ -30,7 +30,7 @@ public class jdbcSQLTest {
         props.put(Config.JDBC_USER,              "");
         props.put(Config.JDBC_PASSWORD,          "");
 
-
+        /*
         props.put(Config.DATABASE,               Config.DATABASE_CIS);
         props.put(Config.JDBC_DRIVER_CLASSNAME,  "cs.jdbc.driver.CompositeDriver");
         props.put(Config.JDBC_URL,               "jdbc:compositesw:dbapi@localhost:9401?domain=composite&dataSource=testDS&connectTimeout=300");
@@ -43,6 +43,7 @@ public class jdbcSQLTest {
         props.put(Config.JDBC_URL,               "jdbc:postgresql://localhost:15432/TPCH");
         props.put(Config.JDBC_USER,              "user1");
         props.put(Config.JDBC_PASSWORD,          "user1");
+        */
 
         return props;
     }

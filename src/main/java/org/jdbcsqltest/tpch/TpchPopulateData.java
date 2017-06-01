@@ -82,7 +82,9 @@ public class TpchPopulateData {
             if( (++nrows % BATCH_SIZE) == 0)
                 pstmt.executeBatch();
         }
-        pstmt.executeBatch();
+        // For remaining rows.
+        if( (nrows % BATCH_SIZE) != 0)
+        	pstmt.executeBatch();
         return nrows;
     }
 }
