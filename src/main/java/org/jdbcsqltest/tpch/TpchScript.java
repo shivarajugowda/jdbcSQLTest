@@ -17,13 +17,13 @@ import java.sql.Types;
 public class TpchScript extends Script {
     private float FLOATING_POINT_DELTA = 0.05f;
     public String sql;
-    private String resultFile;
+    private File resultFile;
     int nextPtr = 0;
 
-    public TpchScript(File file) throws Exception {
+    public TpchScript(File file, String sf) throws Exception {
         super(file.getName());
         sql = FileUtils.readFileToString(file, "UTF-8");
-        resultFile = FilenameUtils.removeExtension(file.getAbsolutePath()) + ".out";
+        resultFile = getResultFile(file, sf); 
     }
 
     public SqlCommand getNextSQLCommand() {
@@ -35,7 +35,7 @@ public class TpchScript extends Script {
     }
 
     public boolean validateResults(ResultSet rs, int nrows) throws Exception {
-        if (nextPtr > 1)
+        if (nextPtr > 1 || !resultFile.exists())
             return false;
 
         ResultSetMetaData rsmeta = rs.getMetaData();

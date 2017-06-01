@@ -21,7 +21,7 @@ import java.util.Set;
 public class TpcdsScript extends Script {
     private float FLOATING_POINT_DELTA = 0.5f;
     public String sql;
-    private String resultFile;
+    private File resultFile;
     int nextPtr = 0;
 
     private static final String[] DISABLED_IDS = {
@@ -61,7 +61,6 @@ public class TpcdsScript extends Script {
 
     public boolean validateResults(ResultSet rs, int nrows) throws Exception {
 
-        File resultFile = new File(this.resultFile);
         if(!resultFile.exists())
             return false;
 

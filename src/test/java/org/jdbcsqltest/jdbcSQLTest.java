@@ -54,7 +54,7 @@ public class jdbcSQLTest {
 
         // Test type.
         props.put(Config.TEST_TYPE,   Config.TEST_TYPE_NIST);
-        props.put(Config.TEST_FOLDER, "./test/nist");
+        props.put(Config.RESOURCES_FOLDER, "./resources/nist");
         Main.Main(props);
     }
 
@@ -65,7 +65,7 @@ public class jdbcSQLTest {
 
         // Test type.
         props.put(Config.TEST_TYPE,   Config.TEST_TYPE_SQLLOGICTEST);
-        props.put(Config.TEST_FOLDER, "./test/sqllogictest");
+        props.put(Config.RESOURCES_FOLDER, "./resources/sqllogictest");
         Main.Main(props);
     }
 
@@ -75,7 +75,7 @@ public class jdbcSQLTest {
 
         // Test type.
         props.put(Config.TEST_TYPE,   Config.TEST_TYPE_FOODMART);
-        props.put(Config.TEST_FOLDER, "./test/foodmart");
+        props.put(Config.RESOURCES_FOLDER, "./resources/foodmart");
         props.put(Config.POPULATE_SCHEMA, false);
 
         Main.Main(props);
@@ -87,8 +87,9 @@ public class jdbcSQLTest {
 
         // Test type.
         props.put(Config.TEST_TYPE,   Config.TEST_TYPE_TPCH);
-        props.put(Config.TEST_FOLDER, "./test/tpch");
-        props.put(Config.POPULATE_SCHEMA, false);
+        props.put(Config.RESOURCES_FOLDER, "./resources/tpch");
+        props.put(Config.SCALE_FACTOR, Config.SCALE_FACTOR_0_01);
+        props.put(Config.POPULATE_SCHEMA, true);
 
         Main.Main(props);
     }
@@ -99,7 +100,7 @@ public class jdbcSQLTest {
 
         // Test type.
         props.put(Config.TEST_TYPE,   Config.TEST_TYPE_TPCDS);
-        props.put(Config.TEST_FOLDER, "./test/tpcds");
+        props.put(Config.RESOURCES_FOLDER, "./resources/tpcds");
         props.put(Config.SCALE_FACTOR, Config.SCALE_FACTOR_1);
         props.put(Config.POPULATE_SCHEMA, false);
 
@@ -110,7 +111,7 @@ public class jdbcSQLTest {
     @Test
     public void temp() throws Exception {
 
-        File testFolder = new File("./test/tpcds/test/answers_SF_1");
+        File testFolder = new File("./resources/tpcds/resources/answers_SF_1");
         Collection<File> files = FileUtils.listFiles(testFolder, new WildcardFileFilter("*.ans"), TrueFileFilter.INSTANCE);
 
         // Test type.

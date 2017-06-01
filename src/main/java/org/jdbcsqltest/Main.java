@@ -48,7 +48,7 @@ public class Main {
     }
 
     public static void testNist(JdbcDriver jdbcDriver, Properties props) throws Exception {
-        File testFolder = new File(props.getProperty(Config.TEST_FOLDER));
+        File testFolder = new File(props.getProperty(Config.RESOURCES_FOLDER));
 
 
         // Run Schema Scripts
@@ -71,7 +71,7 @@ public class Main {
     }
 
     public static void testSqlLogicTest(JdbcDriver jdbcDriver, Properties props) throws Exception {
-        File testFolder = new File(props.getProperty(Config.TEST_FOLDER));
+        File testFolder = new File(props.getProperty(Config.RESOURCES_FOLDER));
 
         // Run SQL Scripts
         List<File> files = new ArrayList<File>();
@@ -93,7 +93,7 @@ public class Main {
     }
 
     public static void testFoodmart(JdbcDriver jdbcDriver, Properties props) throws Exception {
-        File testFolder = new File(props.getProperty(Config.TEST_FOLDER));
+        File testFolder = new File(props.getProperty(Config.RESOURCES_FOLDER));
 
 
         // Run Schema Scripts
@@ -116,29 +116,38 @@ public class Main {
     }
 
     public static void testTPCH(JdbcDriver jdbcDriver, Properties props) throws Exception {
-        File testFolder = new File(props.getProperty(Config.TEST_FOLDER));
+        File testFolder = new File(props.getProperty(Config.RESOURCES_FOLDER));
 
+        String sf = props.getProperty(Config.SCALE_FACTOR);
+        sf = sf == null ? Config.SCALE_FACTOR_0_01 : sf;
+        
         // Run Schema Scripts
         Boolean popSchema = (Boolean)props.get(Config.POPULATE_SCHEMA);
         popSchema = popSchema == null ? true : popSchema; // default true.
         if(popSchema) {
             jdbcDriver.clearSchema();  // Clear database.
             File schemaFolder = new File(testFolder, "schema");
-            List<File> files = (List<File>) FileUtils.listFiles(schemaFolder, TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE);
-            for (File file : files) {
-                Script script = new SchemaScript(file);
-                TestExecutor ex = new TestExecutor(jdbcDriver, script);
-                ex.execute();
-            }
-            TpchPopulateData ex = new TpchPopulateData(jdbcDriver);
+            
+            // Create Tables.
+            Script script = new SchemaScript(new File(schemaFolder, "CreateTables.sql"));
+            TestExecutor ex = new TestExecutor(jdbcDriver, script);
+            ex.execute();
+            
+            // Populate Data.
+            TpchPopulateData popd = new TpchPopulateData(jdbcDriver, sf);
+            popd.execute();
+            
+            // Create Indexes and other constraints.
+            script = new SchemaScript(new File(schemaFolder, "CreateIndexes.sql"));
+            ex = new TestExecutor(jdbcDriver, script);
             ex.execute();
         }
 
         // Run SQL Scripts
-        File sqlFolder = new File(testFolder, "test");
+        File sqlFolder = new File(testFolder, "queries");
         List<File> files = (List<File>) FileUtils.listFiles(sqlFolder, new WildcardFileFilter("*.sql"), TrueFileFilter.INSTANCE);
         for (File file : files) {
-            TpchScript script = new TpchScript(file);
+            TpchScript script = new TpchScript(file, sf);
             TestExecutor ex = new TestExecutor(jdbcDriver, script);
             ex.execute();
         }
@@ -146,7 +155,7 @@ public class Main {
     }
 
     public static void testTPCDS(JdbcDriver jdbcDriver, Properties props) throws Exception {
-        File testFolder = new File(props.getProperty(Config.TEST_FOLDER));
+        File testFolder = new File(props.getProperty(Config.RESOURCES_FOLDER));
 
         // Run Schema Scripts
         Boolean popSchema = (Boolean)props.get(Config.POPULATE_SCHEMA);

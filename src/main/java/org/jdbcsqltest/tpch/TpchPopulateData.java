@@ -3,6 +3,8 @@ package org.jdbcsqltest.tpch;
 import io.airlift.tpch.TpchColumn;
 import io.airlift.tpch.TpchEntity;
 import io.airlift.tpch.TpchTable;
+
+import org.jdbcsqltest.Config;
 import org.jdbcsqltest.JdbcDriver;
 
 import java.sql.Date;
@@ -18,9 +20,12 @@ public class TpchPopulateData {
     private double SCALE_FACTOR = 1.0;
     JdbcDriver conn;
 
-
-    public TpchPopulateData(JdbcDriver conn){
+    public TpchPopulateData(JdbcDriver conn, String sf){
         this.conn = conn;
+        if(Config.SCALE_FACTOR_1.equalsIgnoreCase(sf))
+        	SCALE_FACTOR = 1.0;
+        else
+        	SCALE_FACTOR = 0.01;        
     }
 
     public void execute() throws SQLException {

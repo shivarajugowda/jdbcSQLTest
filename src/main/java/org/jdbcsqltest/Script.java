@@ -59,11 +59,10 @@ public class Script {
     /*
      * Given a test file and a scalefactor, returns the location of the result file.
      */
-    public static String getResultFile(File file, String sf) {
-        File parent = new File(file.getParent(), "answers_" + sf);
-        String baseName = FilenameUtils.removeExtension(file.getName()) + ".ans";
-        File resultFile = new File(parent, baseName);
-        return resultFile.getAbsolutePath();
+    public static File getResultFile(File file, String sf) {
+        File parent = new File(file.getParentFile().getParent(), "results");
+        String baseName = FilenameUtils.removeExtension(file.getName()) + ".out";
+        return new File(parent, baseName);
     }
 
     public static boolean checkResult(int type, String expected, String actual, float FLOATING_POINT_DELTA) {
