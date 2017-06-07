@@ -30,7 +30,7 @@ public class jdbcSQLTest {
         props.put(Config.JDBC_USER,              "");
         props.put(Config.JDBC_PASSWORD,          "");
 
-        
+        /*
         props.put(Config.DATABASE,               Config.DATABASE_CIS);
         props.put(Config.JDBC_DRIVER_CLASSNAME,  "cs.jdbc.driver.CompositeDriver");
         props.put(Config.JDBC_URL,               "jdbc:compositesw:dbapi@localhost:9401?domain=composite&dataSource=testDS&connectTimeout=300");
@@ -44,7 +44,7 @@ public class jdbcSQLTest {
         props.put(Config.JDBC_USER,              "user1");
         props.put(Config.JDBC_PASSWORD,          "user1");
          
-        /*
+        
         props.put(Config.DATABASE,               Config.DATABASE_DB2);
         props.put(Config.JDBC_DRIVER_CLASSNAME,  "com.ibm.db2.jcc.DB2Driver");
         props.put(Config.JDBC_URL,               "jdbc:db2://172.23.7.214:50000/sample");
@@ -102,7 +102,7 @@ public class jdbcSQLTest {
         props.put(Config.TEST_TYPE,   Config.TEST_TYPE_TPCH);
         props.put(Config.RESOURCES_FOLDER, "./resources/tpch");
         props.put(Config.SCALE_FACTOR, Config.SCALE_FACTOR_0_01);
-        props.put(Config.POPULATE_SCHEMA, false);
+       // props.put(Config.POPULATE_SCHEMA, false);
 
         Main.Main(props);
     }
@@ -120,6 +120,7 @@ public class jdbcSQLTest {
         Main.Main(props);
     }
 
+    /*
     @Test
     public void temp() throws Exception {
 
@@ -134,4 +135,5 @@ public class jdbcSQLTest {
             FileUtils.moveFile(file, new File(file.getParentFile(), newname));
         }
     }
+    */
 }

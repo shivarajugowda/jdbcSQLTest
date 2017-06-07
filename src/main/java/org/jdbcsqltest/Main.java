@@ -151,7 +151,7 @@ public class Main {
 
         // Run SQL Scripts
         File sqlFolder = new File(testFolder, "queries");
-        List<File> files = (List<File>) FileUtils.listFiles(sqlFolder, new WildcardFileFilter("*.sql"), TrueFileFilter.INSTANCE);
+        List<File> files = (List<File>) FileUtils.listFiles(sqlFolder, new WildcardFileFilter("*.tpl"), TrueFileFilter.INSTANCE);
         for (File file : files) {
             TpchQuery script = new TpchQuery(file, sf, props.getProperty(Config.DATABASE));
             TestExecutor ex = new TestExecutor(jdbcDriver, script);
