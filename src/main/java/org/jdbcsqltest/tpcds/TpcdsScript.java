@@ -1,9 +1,11 @@
 package org.jdbcsqltest.tpcds;
 
 import net.hydromatic.tpcds.query.Query;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.jdbcsqltest.Script;
+import org.jdbcsqltest.TpcScript;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,7 +20,7 @@ import java.util.Set;
 /**
  * Created by shivshi on 5/25/17.
  */
-public class TpcdsScript extends Script {
+public class TpcdsScript extends TpcScript {
     private float FLOATING_POINT_DELTA = 0.5f;
     public String sql;
     private File resultFile;

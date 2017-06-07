@@ -128,6 +128,12 @@ public class Main {
             jdbcDriver.clearSchema();  // Clear database.
             File schemaFolder = new File(testFolder, "schema");
             
+            /*
+            // Drop Tables.
+            Script script = new SchemaScript(new File(schemaFolder, "DropTables.sql"));
+            TestExecutor ex = new TestExecutor(jdbcDriver, script);
+            ex.execute();
+            */
             // Create Tables.
             Script script = new SchemaScript(new File(schemaFolder, "CreateTables.sql"));
             TestExecutor ex = new TestExecutor(jdbcDriver, script);
@@ -147,7 +153,7 @@ public class Main {
         File sqlFolder = new File(testFolder, "queries");
         List<File> files = (List<File>) FileUtils.listFiles(sqlFolder, new WildcardFileFilter("*.sql"), TrueFileFilter.INSTANCE);
         for (File file : files) {
-            TpchQuery script = new TpchQuery(file, sf);
+            TpchQuery script = new TpchQuery(file, sf, props.getProperty(Config.DATABASE));
             TestExecutor ex = new TestExecutor(jdbcDriver, script);
             ex.execute();
         }

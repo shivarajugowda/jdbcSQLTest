@@ -3,6 +3,7 @@ package org.jdbcsqltest.tpch;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.jdbcsqltest.Script;
+import org.jdbcsqltest.TpcScript;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,19 +15,25 @@ import java.sql.Types;
 /**
  * Created by shivshi on 5/24/17.
  */
-public class TpchQuery extends Script {
+public class TpchQuery extends TpcScript {
     private float FLOATING_POINT_DELTA = 0.05f;
     public String sql;
     private File resultFile;
     int nextPtr = 0;
 
-    public TpchQuery(File file, String sf) throws Exception {
+    public TpchQuery(File file, String sf, String dbType) throws Exception {
         super(file.getName());
         sql = FileUtils.readFileToString(file, "UTF-8");
+        sql = this.fixLimit(dbType, sql);
         resultFile = getResultFile(file, sf); 
     }
 
     public SqlCommand getNextSQLCommand() {
+    	
+    	if(!"q02.sql".equalsIgnoreCase(name)) {
+    	//	return null;
+    	}
+    	
         if (nextPtr > 0)
             return null;
 

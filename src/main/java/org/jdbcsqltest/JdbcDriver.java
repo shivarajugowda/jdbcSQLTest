@@ -59,7 +59,7 @@ public class JdbcDriver {
     }
     private void setSchema(Connection connection) throws SQLException {
 
-        if (Config.DATABASE_CIS.equals(dbType))
+        if (Config.DATABASE_CIS.equals(dbType) || Config.DATABASE_SQL_SERVER.equals(dbType))
             return;
 
         Statement stmt = connection.createStatement();
@@ -70,17 +70,17 @@ public class JdbcDriver {
             // Ignore if the schema already exists.
         }
                
-        if(Config.DATABASE_HSQLDB.equals(dbType))
-            stmt.executeUpdate("SET SCHEMA " + SCHEMA_NAME);
-        else if (Config.DATABASE_PGSQL.equals(dbType))
-            stmt.executeUpdate("SET SCHEMA '" + SCHEMA_NAME + "'");
+        if(Config.DATABASE_PGSQL.equals(dbType))
+        	stmt.executeUpdate("SET SCHEMA '" + SCHEMA_NAME + "'");         
+        else
+        	  stmt.executeUpdate("SET SCHEMA " + SCHEMA_NAME);
 
         stmt.close();
     }
 
     public void clearSchema() throws SQLException {
 
-        if(Config.DATABASE_CIS.equals(dbType))
+        if(Config.DATABASE_CIS.equals(dbType) || Config.DATABASE_DB2.equals(dbType) || Config.DATABASE_SQL_SERVER.equals(dbType))
             return;
 
         Statement stmt = conn.createStatement();

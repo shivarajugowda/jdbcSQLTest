@@ -62,9 +62,9 @@ public class TestExecutor {
                     //System.out.println("Passed " + cmd.name + ", Time taken : " + (System.currentTimeMillis() - queryStartTime));
                 } catch (Throwable e) {
                     nfailed++;
-                    System.out.println("Failed to execute id = " + cmd.name + ", sql = " + cmd.sql + "\n" + e);
-                    failedCases.append(cmd.name).append(",");
-                    System.exit(1);
+                    //System.out.println("Failed to execute id = " + cmd.name + ", sql = " + cmd.sql + "\n" + e);
+                    //failedCases.append(cmd.name).append(",");
+                   // throw new IllegalStateException(e);
                     //break;
                 } finally {
                     if (stmt != null)

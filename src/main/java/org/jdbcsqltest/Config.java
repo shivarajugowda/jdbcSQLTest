@@ -20,6 +20,9 @@ public class Config {
     public static final String DATABASE_HSQLDB = "HSQLDB";
     public static final String DATABASE_PGSQL  = "PostgreSQL";
     public static final String DATABASE_CIS    = "CIS";
+    public static final String DATABASE_DB2    = "DB2";
+    public static final String DATABASE_ORACLE = "Oracle";
+    public static final String DATABASE_SQL_SERVER = "SQLServer";
 
     // The remaining properties come from config file.
     public static final String DATA_DIR = "data.dir";
