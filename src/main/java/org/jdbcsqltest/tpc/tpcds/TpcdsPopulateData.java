@@ -1,9 +1,11 @@
-package org.jdbcsqltest.tpcds;
+package org.jdbcsqltest.tpc.tpcds;
 
 import com.teradata.tpcds.Results;
 import com.teradata.tpcds.Session;
 import com.teradata.tpcds.Table;
 import com.teradata.tpcds.column.Column;
+
+import org.jdbcsqltest.Config;
 import org.jdbcsqltest.JdbcDriver;
 
 import java.sql.*;
@@ -16,20 +18,25 @@ import java.util.List;
  */
 public class TpcdsPopulateData {
     private int BATCH_SIZE = 1000;
-    private int SCALE_FACTOR = 1;
+    private double SCALE_FACTOR = 1;
     JdbcDriver conn;
 
-    public TpcdsPopulateData(JdbcDriver conn) {
+    public TpcdsPopulateData(JdbcDriver conn, String sf) {
         this.conn = conn;
+        if(Config.SCALE_FACTOR_1.equalsIgnoreCase(sf))
+        	SCALE_FACTOR = 1.0;
+        else
+        	SCALE_FACTOR = 0.01; 
     }
 
     public void execute() throws SQLException {
         for (Table tpcdsTable : Table.getBaseTables()) {
             long startTime = System.currentTimeMillis();
-            //long nrows = populateTable(Table.CUSTOMER);
-            long nrows = populateTable(tpcdsTable);
+            long nrows = 0;
+            //if("DBGEN_VERSION".equalsIgnoreCase(tpcdsTable.getName()))
+            nrows = populateTable(tpcdsTable);
             System.out.format("%-35s %1s %-15s %-15s \n",
-                    "Populate table " + tpcdsTable.getName(),
+                    "Populate " + tpcdsTable.getName(),
                     ":",
                     "#Rows = " + nrows,
                     "Time(ms) " + (System.currentTimeMillis() - startTime));
@@ -52,7 +59,15 @@ public class TpcdsPopulateData {
 
         PreparedStatement pstmt = conn.getConnection().prepareStatement(sb.toString());
 
-        Session session = Session.getDefaultSession().withTable(tpcdsTable).withScale(SCALE_FACTOR);
+        // Minimum value for scale = 1. To accomplish fractional scale, limit the rows.
+        int scale = SCALE_FACTOR > 1 ? (int)SCALE_FACTOR : 1;
+        Integer MAX_ROWS = null;
+        if(SCALE_FACTOR < 1){
+        	// Size of the biggest table, inventory = 11745000
+        	MAX_ROWS = (int) (11745000 * SCALE_FACTOR);
+        }
+               
+        Session session = Session.getDefaultSession().withTable(tpcdsTable).withScale(scale);
         Results results = Results.constructResults(tpcdsTable, session);
         Iterator res = results.iterator();
         long nrows = 0;
@@ -70,29 +85,33 @@ public class TpcdsPopulateData {
             pstmt.addBatch();
             if ((++nrows % BATCH_SIZE) == 0)
                 pstmt.executeBatch();
+            
+            // For scale factors < 1.
+            if(MAX_ROWS != null && nrows > MAX_ROWS) {
+            	break;
+            }
         }
-        pstmt.executeBatch();
+        // For remaining rows.
+        if( (nrows % BATCH_SIZE) != 0)
+        	pstmt.executeBatch();
+        
         pstmt.close();
         return nrows;
     }
 
-    private ArrayList<Integer> getColumnTypes(String tableName){
-        ArrayList<Integer> result = new ArrayList<Integer>();
+	private ArrayList<Integer> getColumnTypes(String tableName)
+			throws SQLException {
+		ArrayList<Integer> result = new ArrayList<Integer>();
 
-        try {
-            DatabaseMetaData dbmeta = conn.getConnection().getMetaData();
-            ResultSet columns = dbmeta.getColumns(null, conn.getSchema(), tableName, null);
+		DatabaseMetaData dbmeta = conn.getConnection().getMetaData();
+		ResultSet columns = dbmeta.getColumns(null, conn.getSchema(),
+				tableName, null);
 
-            while (columns.next()) {
-                int datatype = columns.getInt("DATA_TYPE");
-                result.add(datatype);
-            }
+		while (columns.next()) {
+			int datatype = columns.getInt("DATA_TYPE");
+			result.add(datatype);
+		}
 
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        return result;
-    }
+		return result;
+	}
 }

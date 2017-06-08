@@ -9,11 +9,12 @@ import org.jdbcsqltest.foodmart.FoodmartSqlScript;
 import org.jdbcsqltest.nist.SchemaScript;
 import org.jdbcsqltest.nist.SqlScript;
 import org.jdbcsqltest.sqllogictest.SltScript;
-import org.jdbcsqltest.tpcds.TpcdsPopulateData;
-import org.jdbcsqltest.tpcds.TpcdsScript;
-import org.jdbcsqltest.tpcds.TpcdsScript_bak;
-import org.jdbcsqltest.tpch.TpchPopulateData;
-import org.jdbcsqltest.tpch.TpchQuery;
+import org.jdbcsqltest.tpc.TpcSchema;
+import org.jdbcsqltest.tpc.tpcds.TpcdsPopulateData;
+import org.jdbcsqltest.tpc.tpcds.TpcdsQuery;
+import org.jdbcsqltest.tpc.tpcds.TpcdsScript_bak;
+import org.jdbcsqltest.tpc.tpch.TpchPopulateData;
+import org.jdbcsqltest.tpc.tpch.TpchQuery;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -118,6 +119,7 @@ public class Main {
     public static void testTPCH(JdbcDriver jdbcDriver, Properties props) throws Exception {
         File testFolder = new File(props.getProperty(Config.RESOURCES_FOLDER));
 
+        String dbType = props.getProperty(Config.DATABASE);
         String sf = props.getProperty(Config.SCALE_FACTOR);
         sf = sf == null ? Config.SCALE_FACTOR_0_01 : sf;
         
@@ -128,14 +130,13 @@ public class Main {
             jdbcDriver.clearSchema();  // Clear database.
             File schemaFolder = new File(testFolder, "schema");
             
-            /*
             // Drop Tables.
-            Script script = new SchemaScript(new File(schemaFolder, "DropTables.sql"));
-            TestExecutor ex = new TestExecutor(jdbcDriver, script);
-            ex.execute();
-            */
+            Script scriptD = new TpcSchema(new File(schemaFolder, "DropTables.sql"), dbType);
+            TestExecutor exD = new TestExecutor(jdbcDriver, scriptD);
+            exD.execute();
+            
             // Create Tables.
-            Script script = new SchemaScript(new File(schemaFolder, "CreateTables.sql"));
+            Script script = new TpcSchema(new File(schemaFolder, "CreateTables.sql"), dbType);
             TestExecutor ex = new TestExecutor(jdbcDriver, script);
             ex.execute();
             
@@ -149,7 +150,7 @@ public class Main {
             ex.execute();
         }
 
-        // Run SQL Scripts
+        // Run Queries
         File sqlFolder = new File(testFolder, "queries");
         List<File> files = (List<File>) FileUtils.listFiles(sqlFolder, new WildcardFileFilter("*.tpl"), TrueFileFilter.INSTANCE);
         for (File file : files) {
@@ -163,6 +164,10 @@ public class Main {
     public static void testTPCDS(JdbcDriver jdbcDriver, Properties props) throws Exception {
         File testFolder = new File(props.getProperty(Config.RESOURCES_FOLDER));
 
+        String dbType = props.getProperty(Config.DATABASE);
+        String sf = props.getProperty(Config.SCALE_FACTOR);
+        sf = sf == null ? Config.SCALE_FACTOR_0_01 : sf;
+        
         // Run Schema Scripts
         Boolean popSchema = (Boolean)props.get(Config.POPULATE_SCHEMA);
         popSchema = popSchema == null ? true : popSchema; // default true.
@@ -171,23 +176,20 @@ public class Main {
             File schemaFolder = new File(testFolder, "schema");
             List<File> files = (List<File>) FileUtils.listFiles(schemaFolder, new WildcardFileFilter("*.sql"), TrueFileFilter.INSTANCE);
             for (File file : files) {
-                Script script = new SchemaScript(file);
+                Script script = new TpcSchema(file, dbType);
                 TestExecutor ex = new TestExecutor(jdbcDriver, script);
                 ex.execute();
             }
-            TpcdsPopulateData ex = new TpcdsPopulateData(jdbcDriver);
+            TpcdsPopulateData ex = new TpcdsPopulateData(jdbcDriver, sf);
             ex.execute();
         }
 
-        // Run SQL Scripts
-        String sf = props.getProperty(Config.SCALE_FACTOR);
-        sf = sf == null ? Config.SCALE_FACTOR_1 : sf;
-
-        File sqlFolder = new File(testFolder, "test");
-        List<File> files = (List<File>) FileUtils.listFiles(sqlFolder, new WildcardFileFilter("*.sql"), TrueFileFilter.INSTANCE);
+        // Run SQL Queries
+        File sqlFolder = new File(testFolder, "queries");
+        List<File> files = (List<File>) FileUtils.listFiles(sqlFolder, new WildcardFileFilter("*.tpl"), TrueFileFilter.INSTANCE);
         for (File file : files) {
             //System.out.println("Working on " + file.getName());
-            TpcdsScript script = new TpcdsScript(file, sf);
+        	TpcdsQuery script = new TpcdsQuery(file, sf, dbType);
             TestExecutor ex = new TestExecutor(jdbcDriver, script);
             ex.execute();
         }

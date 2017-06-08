@@ -471,7 +471,7 @@ create table time_dim (
                 t_sub_shift              char(20),
                 t_meal_time              char(20));
 
-create table dsdgen_version (
+create table dbgen_version (
                 dv_version               varchar(24) not null,
                 dv_create_date           date not null,
                 dv_create_time           time not null,

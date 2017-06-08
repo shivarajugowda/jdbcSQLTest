@@ -1,4 +1,4 @@
-package org.jdbcsqltest.tpch;
+package org.jdbcsqltest.tpc.tpch;
 
 import io.airlift.tpch.TpchColumn;
 import io.airlift.tpch.TpchEntity;

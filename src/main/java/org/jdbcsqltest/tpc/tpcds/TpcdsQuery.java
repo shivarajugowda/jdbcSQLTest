@@ -1,11 +1,11 @@
-package org.jdbcsqltest.tpcds;
+package org.jdbcsqltest.tpc.tpcds;
 
 import net.hydromatic.tpcds.query.Query;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.jdbcsqltest.Script;
-import org.jdbcsqltest.TpcScript;
+import org.jdbcsqltest.tpc.TpcQuery;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,10 +20,8 @@ import java.util.Set;
 /**
  * Created by shivshi on 5/25/17.
  */
-public class TpcdsScript extends TpcScript {
+public class TpcdsQuery extends TpcQuery {
     private float FLOATING_POINT_DELTA = 0.5f;
-    public String sql;
-    private File resultFile;
     int nextPtr = 0;
 
     private static final String[] DISABLED_IDS = {
@@ -31,37 +29,37 @@ public class TpcdsScript extends TpcScript {
        "q05", "q14", "q18", "q22", "q27", "q36", "q67", "q70", "q77", "q80", "q86",
 
        // Incorrect results
-       "q30", "q78",
+       //"q30", "q78",
 
        // TOO Slow or haven't finished.
        "q01", "q04", "q06", "q10", "q11", "q35", "q47", "q57", "q74", "q81",
 
        // 100+ secs.
-       "q95",
+       //"q95",
 
     };
     public static final Set<String> DISABLED_IDS_SET = new HashSet<String>(Arrays.asList(DISABLED_IDS));
 
-    public TpcdsScript(File file, String scaleFactor) throws Exception {
-        super(FilenameUtils.getBaseName(file.getName()));
-        sql = FileUtils.readFileToString(file, "UTF-8");
-        resultFile = getResultFile(file, scaleFactor);
+    public TpcdsQuery(File file, String sf, String dbType) throws Exception {
+        super(file, sf, dbType);
     }
 
     public SqlCommand getNextSQLCommand() {
         if (nextPtr > 0 || DISABLED_IDS_SET.contains(this.getName()))
             return null;
 
+        /*
         String numStr = this.getName().substring(1,3);
         int num = Integer.valueOf(numStr);
         if (num != 35)
             return null;
-
+         */
+        
         nextPtr++;
         return new SqlCommand(this.getName(), sql);
     }
 
-    public boolean validateResults(ResultSet rs, int nrows) throws Exception {
+    public boolean validateResults_ORIG(ResultSet rs, int nrows) throws Exception {
 
         if(!resultFile.exists())
             return false;
@@ -86,7 +84,10 @@ public class TpcdsScript extends TpcScript {
             if (resultMatchError == null) {
                 String[] tokens = splitLine(header, s);
                 for (int i = 0; i < rsmeta.getColumnCount(); i++) {
-                    if (!checkResult(rsmeta.getColumnType(i + 1), rs.getString(i + 1), tokens[i], FLOATING_POINT_DELTA)) {
+                	String expected = tokens[i];
+                	int colType = rsmeta.getColumnType(i + 1);
+                	Object actual = rs.getObject(i+1);
+                    if (!checkResult(colType, expected, actual, FLOATING_POINT_DELTA)) {
                         resultMatchError = "Column " + rsmeta.getColumnName(i + 1) + ". DataType " + rsmeta.getColumnTypeName(i + 1) + " " + rsmeta.getColumnType(i + 1) + ". Value " + rs.getString(i + 1) + " != " + tokens[i].trim();
                         break;
                     }

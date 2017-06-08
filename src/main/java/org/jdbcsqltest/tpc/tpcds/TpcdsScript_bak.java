@@ -1,4 +1,4 @@
-package org.jdbcsqltest.tpcds;
+package org.jdbcsqltest.tpc.tpcds;
 
 import net.hydromatic.tpcds.query.Query;
 import org.apache.commons.io.FileUtils;
