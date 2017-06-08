@@ -29,38 +29,8 @@ public class jdbcSQLTest {
         props.put(Config.JDBC_URL,               "jdbc:hsqldb:file:"+ HSQLDB_WORK_FOLDER + ";hsqldb.default_table_type=memory;hsqldb.tx=mvcc;hx.compact_mem=true");
         props.put(Config.JDBC_USER,              "");
         props.put(Config.JDBC_PASSWORD,          "");  
-
-
         
-        props.put(Config.DATABASE,               Config.DATABASE_SQL_SERVER);
-        props.put(Config.JDBC_DRIVER_CLASSNAME,  "com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        props.put(Config.JDBC_URL,               "jdbc:sqlserver://172.23.7.242:1433;databaseName=devstd");
-        props.put(Config.JDBC_USER,              "dev1");
-        props.put(Config.JDBC_PASSWORD,          "password");
-        	
-        props.put(Config.DATABASE,               Config.DATABASE_CIS);
-        props.put(Config.JDBC_DRIVER_CLASSNAME,  "cs.jdbc.driver.CompositeDriver");
-        props.put(Config.JDBC_URL,               "jdbc:compositesw:dbapi@localhost:9401?domain=composite&dataSource=testDS&connectTimeout=300");
-        props.put(Config.JDBC_USER,              "admin");
-        props.put(Config.JDBC_PASSWORD,          "admin"); 
-        
-        props.put(Config.DATABASE,                Config.DATABASE_ORACLE);
-        props.put(Config.JDBC_DRIVER_CLASSNAME,  "oracle.jdbc.OracleDriver");
-        props.put(Config.JDBC_URL,               "jdbc:oracle:thin:@dvbu-ora1:11521:OR11G01");
-        props.put(Config.JDBC_USER,              "test");
-        props.put(Config.JDBC_PASSWORD,          "password");  
-        
-        props.put(Config.DATABASE,                Config.DATABASE_PGSQL);
-        props.put(Config.JDBC_DRIVER_CLASSNAME,  "org.postgresql.Driver");
-        props.put(Config.JDBC_URL,               "jdbc:postgresql://localhost:15432/TPCH");
-        props.put(Config.JDBC_USER,              "user1");
-        props.put(Config.JDBC_PASSWORD,          "user1"); 
-        
-        props.put(Config.DATABASE,               Config.DATABASE_DB2);
-        props.put(Config.JDBC_DRIVER_CLASSNAME,  "com.ibm.db2.jcc.DB2Driver");
-        props.put(Config.JDBC_URL,               "jdbc:db2://172.23.7.214:50000/sample");
-        props.put(Config.JDBC_USER,              "dev1");
-        props.put(Config.JDBC_PASSWORD,          "password");
+ 
        
 
         return props;
