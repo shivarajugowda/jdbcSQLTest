@@ -12,7 +12,6 @@ import org.jdbcsqltest.sqllogictest.SltScript;
 import org.jdbcsqltest.tpc.TpcSchema;
 import org.jdbcsqltest.tpc.tpcds.TpcdsPopulateData;
 import org.jdbcsqltest.tpc.tpcds.TpcdsQuery;
-import org.jdbcsqltest.tpc.tpcds.TpcdsScript_bak;
 import org.jdbcsqltest.tpc.tpch.TpchPopulateData;
 import org.jdbcsqltest.tpc.tpch.TpchQuery;
 

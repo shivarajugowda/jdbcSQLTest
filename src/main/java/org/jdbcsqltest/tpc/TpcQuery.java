@@ -45,8 +45,7 @@ public class TpcQuery extends Script {
 	}
 	
 	@Override
-    public boolean validateResults(ResultSet rs, int nrows) throws Exception {
-    	 
+    public boolean validateResults(ResultSet rs, int nrows) throws Exception {    	 
 		/*
     	writeResults(resultFile, rs);
     	if(1==1)
