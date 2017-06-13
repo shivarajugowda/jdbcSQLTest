@@ -1,4 +1,5 @@
 --q75.sql--
+-- define _LIMIT=100
 
  WITH all_sales AS (
     SELECT
@@ -38,7 +39,7 @@
                                   AND ws_item_sk=wr_item_sk)
         WHERE i_category='Books') sales_detail
     GROUP BY d_year, i_brand_id, i_class_id, i_category_id, i_manufact_id)
- SELECT
+ [_LIMITA] SELECT [_LIMITB]
     prev_yr.d_year AS prev_year, curr_yr.d_year AS year, curr_yr.i_brand_id,
     curr_yr.i_class_id, curr_yr.i_category_id, curr_yr.i_manufact_id,
     prev_yr.sales_cnt AS prev_yr_cnt, curr_yr.sales_cnt AS curr_yr_cnt,
@@ -53,5 +54,5 @@
    AND prev_yr.d_year=2002-1
    AND CAST(curr_yr.sales_cnt AS DECIMAL(17,2))/CAST(prev_yr.sales_cnt AS DECIMAL(17,2))<0.9
  ORDER BY sales_cnt_diff, i_brand_id
- LIMIT 100
+ [_LIMITC]
             

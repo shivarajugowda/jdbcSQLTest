@@ -1,4 +1,5 @@
 --q81.sql--
+-- define _LIMIT=100
 
  with customer_total_return as
  (select
@@ -9,7 +10,7 @@
    and d_year = 2000
    and cr_returning_addr_sk = ca_address_sk
  group by cr_returning_customer_sk, ca_state )
- select
+ [_LIMITA] select [_LIMITB]
     c_customer_id,c_salutation,c_first_name,c_last_name,ca_street_number,ca_street_name,
     ca_street_type,ca_suite_number,ca_city,ca_county,ca_state,ca_zip,ca_country,
     ca_gmt_offset,ca_location_type,ctr_total_return
@@ -23,5 +24,5 @@
  order by c_customer_id,c_salutation,c_first_name,c_last_name,ca_street_number,ca_street_name
                    ,ca_street_type,ca_suite_number,ca_city,ca_county,ca_state,ca_zip,ca_country,ca_gmt_offset
                   ,ca_location_type,ctr_total_return
- limit 100
+ [_LIMITC]
             

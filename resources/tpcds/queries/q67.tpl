@@ -1,6 +1,7 @@
 --q67.sql--
+-- define _LIMIT=100
 
- select * from
+ [_LIMITA] select [_LIMITB] * from
      (select i_category, i_class, i_brand, i_product_name, d_year, d_qoy, d_moy, s_store_id,
              sumsales, rank() over (partition by i_category order by sumsales desc) rk
       from
@@ -17,5 +18,5 @@
  order by
    i_category, i_class, i_brand, i_product_name, d_year,
    d_qoy, d_moy, s_store_id, sumsales, rk
- limit 100
+ [_LIMITC]
             

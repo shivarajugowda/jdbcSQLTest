@@ -1,6 +1,7 @@
 --q96.sql--
+-- define _LIMIT=100
 
- select count(*)
+ [_LIMITA] select [_LIMITB] count(*)
  from store_sales, household_demographics, time_dim, store
  where ss_sold_time_sk = time_dim.t_time_sk
      and ss_hdemo_sk = household_demographics.hd_demo_sk
@@ -10,5 +11,5 @@
      and household_demographics.hd_dep_count = 7
      and store.s_store_name = 'ese'
  order by count(*)
- limit 100
+ [_LIMITC]
             

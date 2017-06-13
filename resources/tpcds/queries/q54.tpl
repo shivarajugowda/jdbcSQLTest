@@ -1,4 +1,5 @@
 --q54.sql--
+-- define _LIMIT=100
 
  with my_customers as (
  select distinct c_customer_sk
@@ -46,9 +47,9 @@
  )
  , segments as
  (select cast((revenue/50) as integer) as segment from my_revenue)
- select segment, count(*) as num_customers, segment*50 as segment_base
+ [_LIMITA] select [_LIMITB] segment, count(*) as num_customers, segment*50 as segment_base
  from segments
  group by segment
  order by segment, num_customers
- limit 100
+ [_LIMITC]
             

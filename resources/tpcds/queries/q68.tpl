@@ -1,6 +1,7 @@
 --q68.sql--
+-- define _LIMIT=100
 
- select
+ [_LIMITA] select [_LIMITB]
     c_last_name, c_first_name, ca_city, bought_city, ss_ticket_number, extended_price,
     extended_tax, list_price
  from (select
@@ -25,5 +26,5 @@
    and customer.c_current_addr_sk = current_addr.ca_address_sk
    and current_addr.ca_city <> bought_city
  order by c_last_name, ss_ticket_number
- limit 100
+ [_LIMITC]
             

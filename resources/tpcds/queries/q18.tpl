@@ -1,6 +1,7 @@
 --q18.sql--
+-- define _LIMIT=100
 
- select i_item_id,
+ [_LIMITA] select [_LIMITB] i_item_id,
         ca_country,
         ca_state,
         ca_county,
@@ -26,5 +27,5 @@
        ca_state  in ('MS','IN','ND','OK','NM','VA','MS')
  group by rollup (i_item_id, ca_country, ca_state, ca_county)
  order by ca_country, ca_state, ca_county, i_item_id
- LIMIT 100
+ [_LIMITC]
             

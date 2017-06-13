@@ -1,6 +1,7 @@
 --q63.sql--
+-- define _LIMIT=100
 
- select *
+ [_LIMITA] select [_LIMITB] *
  from (select i_manager_id
               ,sum(ss_sales_price) sum_sales
               ,avg(sum(ss_sales_price)) over (partition by i_manager_id) avg_monthly_sales
@@ -26,5 +27,5 @@
  order by i_manager_id
          ,avg_monthly_sales
          ,sum_sales
- limit 100
+ [_LIMITC]
             

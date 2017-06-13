@@ -1,4 +1,5 @@
 --q78.sql--
+-- define _LIMIT=100
 
  with ws as
    (select d_year AS ws_sold_year, ws_item_sk,
@@ -36,7 +37,7 @@
     where sr_ticket_number is null
     group by d_year, ss_item_sk, ss_customer_sk
     )
- select
+ [_LIMITA] select [_LIMITB]
    ss_sold_year, ss_item_sk, ss_customer_sk,
    round(ss_qty/(coalesce(ws_qty,0)+coalesce(cs_qty,0)),2) ratio,
    ss_qty store_qty, ss_wc store_wholesale_cost, ss_sp store_sales_price,
@@ -54,5 +55,5 @@
    other_chan_wholesale_cost,
    other_chan_sales_price,
    round(ss_qty/(coalesce(ws_qty+cs_qty,1)),2)
-  limit 100
+  [_LIMITC]
             

@@ -1,7 +1,8 @@
 --q84.sql--
+-- define _LIMIT=100
 
- select c_customer_id as customer_id
-       ,coalesce(c_last_name,'') || ', ' || coalesce(c_first_name,'') as customername
+ [_LIMITA] select [_LIMITB] c_customer_id as customer_id
+       ,trim(coalesce(c_last_name,'')) || ', ' || trim(coalesce(c_first_name,'')) as customername
  from customer
      ,customer_address
      ,customer_demographics
@@ -17,5 +18,5 @@
    and hd_demo_sk = c_current_hdemo_sk
    and sr_cdemo_sk = cd_demo_sk
  order by c_customer_id
- limit 100
+ [_LIMITC]
             

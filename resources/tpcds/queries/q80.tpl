@@ -1,4 +1,5 @@
 --q80.sql--
+-- define _LIMIT=100
 
  with ssr as
  (select  s_store_id as store_id,
@@ -9,8 +10,8 @@
          (ss_item_sk = sr_item_sk and ss_ticket_number = sr_ticket_number),
      date_dim, store, item, promotion
  where ss_sold_date_sk = d_date_sk
-       and d_date between cast('2000-08-23' as date)
-                  and (cast('2000-08-23' as date) + interval '30' day)
+       and d_date between date'2000-08-23'
+                  and (date'2000-08-23' + interval '30' day)
        and ss_store_sk = s_store_sk
        and ss_item_sk = i_item_sk
        and i_current_price > 50
@@ -26,8 +27,8 @@
          (cs_item_sk = cr_item_sk and cs_order_number = cr_order_number),
      date_dim, catalog_page, item, promotion
  where cs_sold_date_sk = d_date_sk
-       and d_date between cast('2000-08-23' as date)
-                  and (cast('2000-08-23' as date) + interval '30' day)
+       and d_date between date'2000-08-23' 
+                  and (date'2000-08-23' + interval '30' day)
         and cs_catalog_page_sk = cp_catalog_page_sk
        and cs_item_sk = i_item_sk
        and i_current_price > 50
@@ -43,15 +44,15 @@
          (ws_item_sk = wr_item_sk and ws_order_number = wr_order_number),
      date_dim, web_site, item, promotion
  where ws_sold_date_sk = d_date_sk
-       and d_date between cast('2000-08-23' as date)
-                  and (cast('2000-08-23' as date) + interval '30' day)
+       and d_date between date'2000-08-23' 
+                  and (date'2000-08-23' + interval '30' day)
         and ws_web_site_sk = web_site_sk
        and ws_item_sk = i_item_sk
        and i_current_price > 50
        and ws_promo_sk = p_promo_sk
        and p_channel_tv = 'N'
  group by web_site_id)
- select channel, id, sum(sales) as sales, sum(returns) as returns, sum(profit) as profit
+ [_LIMITA] select [_LIMITB] channel, id, sum(sales) as sales, sum(returns) as returns, sum(profit) as profit
  from (select
         'store channel' as channel, concat('store', store_id) as id, sales, returns, profit
       from ssr
@@ -66,5 +67,5 @@
       from  wsr) x
  group by rollup (channel, id)
  order by channel, id
- limit 100
+ [_LIMITC]
             

@@ -1,6 +1,7 @@
 --q70.sql--
+-- define _LIMIT=100
 
- select
+ [_LIMITA] select [_LIMITB]
     sum(ss_net_profit) as total_sum, s_state, s_county
    ,grouping(s_state)+grouping(s_county) as lochierarchy
    ,rank() over (
@@ -28,5 +29,5 @@
    lochierarchy desc
   ,case when lochierarchy = 0 then s_state end
   ,rank_within_parent
- limit 100
+ [_LIMITC]
             

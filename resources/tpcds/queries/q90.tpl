@@ -1,6 +1,7 @@
 --q90.sql--
+-- define _LIMIT=100
 
- select cast(amc as decimal(15,4))/cast(pmc as decimal(15,4)) am_pm_ratio
+ [_LIMITA] select [_LIMITB] cast(amc as decimal(15,4))/cast(pmc as decimal(15,4)) am_pm_ratio
  from ( select count(*) amc
        from web_sales, household_demographics , time_dim, web_page
        where ws_sold_time_sk = time_dim.t_time_sk
@@ -18,5 +19,5 @@
          and household_demographics.hd_dep_count = 6
          and web_page.wp_char_count between 5000 and 5200) pt
  order by am_pm_ratio
- limit 100
+ [_LIMITC]
             

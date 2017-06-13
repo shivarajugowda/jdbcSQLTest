@@ -1,6 +1,7 @@
 --q45.sql--
+-- define _LIMIT=100
 
- select ca_zip, ca_city, sum(ws_sales_price)
+ [_LIMITA] select [_LIMITB] ca_zip, ca_city, sum(ws_sales_price)
  from web_sales, customer, customer_address, date_dim, item
  where ws_bill_customer_sk = c_customer_sk
  	and c_current_addr_sk = ca_address_sk
@@ -16,5 +17,5 @@
  	and d_qoy = 2 and d_year = 2001
  group by ca_zip, ca_city
  order by ca_zip, ca_city
- limit 100
+ [_LIMITC]
             

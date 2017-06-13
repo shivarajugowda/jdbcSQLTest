@@ -1,4 +1,5 @@
 --q05.sql--
+-- define _LIMIT=100
 
  WITH ssr AS
   (SELECT s_store_id,
@@ -24,8 +25,8 @@
     FROM store_returns)
     salesreturns, date_dim, store
   WHERE date_sk = d_date_sk
-       and d_date between cast('2000-08-23' as date)
-                  and ((cast('2000-08-23' as date) + interval '14' day))
+       and d_date between date'2000-08-23'
+                  and (date'2000-08-23' + interval '14' day)
        and store_sk = s_store_sk
  GROUP BY s_store_id),
  csr AS
@@ -52,8 +53,8 @@
     from catalog_returns
    ) salesreturns, date_dim, catalog_page
  WHERE date_sk = d_date_sk
-       and d_date between cast('2000-08-23' as date)
-                  and ((cast('2000-08-23' as date) + interval '14' day))
+       and d_date between date'2000-08-23'
+                  and (date'2000-08-23' + interval '14' day)
        and page_sk = cp_catalog_page_sk
  GROUP BY cp_catalog_page_id)
  ,
@@ -83,11 +84,11 @@
            and wr_order_number = ws_order_number)
    ) salesreturns, date_dim, web_site
  WHERE date_sk = d_date_sk
-       and d_date between cast('2000-08-23' as date)
-                  and ((cast('2000-08-23' as date) + interval '14' day))
+       and d_date between date'2000-08-23'
+                  and (date'2000-08-23' + interval '14' day)
        and wsr_web_site_sk = web_site_sk
  GROUP BY web_site_id)
- SELECT channel,
+ [_LIMITA] SELECT [_LIMITB] channel,
         id,
         sum(sales) as sales,
         sum(returns) as returns,
@@ -116,5 +117,5 @@
  ) x
  GROUP BY ROLLUP (channel, id)
  ORDER BY channel, id
- LIMIT 100
+ [_LIMITC]
             

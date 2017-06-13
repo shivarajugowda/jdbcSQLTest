@@ -1,6 +1,7 @@
 --q29.sql--
+-- define _LIMIT=100
 
- select
+ [_LIMITA] select [_LIMITB]
      i_item_id
     ,i_item_desc
     ,s_store_id
@@ -31,5 +32,5 @@
     i_item_id, i_item_desc, s_store_id, s_store_name
  order by
     i_item_id, i_item_desc, s_store_id, s_store_name
- limit 100
+ [_LIMITC]
             

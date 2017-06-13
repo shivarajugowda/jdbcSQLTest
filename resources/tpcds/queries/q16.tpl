@@ -1,13 +1,14 @@
 --q16.sql--
+-- define _LIMIT=100
 
- select
+ [_LIMITA] select [_LIMITB]
    count(distinct cs_order_number) as "order count",
    sum(cs_ext_ship_cost) as "total shipping cost",
    sum(cs_net_profit) as "total net profit"
  from
    catalog_sales cs1, date_dim, customer_address, call_center
  where
-   d_date between cast ('2002-02-01' as date) and (cast('2002-02-01' as date) + interval '60' day)
+   d_date between date'2002-02-01' and (date'2002-02-01' + interval '60' day)
  and cs1.cs_ship_date_sk = d_date_sk
  and cs1.cs_ship_addr_sk = ca_address_sk
  and ca_state = 'GA'
@@ -21,5 +22,5 @@
                from catalog_returns cr1
                where cs1.cs_order_number = cr1.cr_order_number)
  order by count(distinct cs_order_number)
- limit 100
+ [_LIMITC]
             

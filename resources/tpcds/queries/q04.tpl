@@ -1,4 +1,5 @@
 --q04.sql--
+-- define _LIMIT=100
 
 WITH year_total AS (
  SELECT c_customer_id customer_id,
@@ -63,7 +64,7 @@ WITH year_total AS (
           c_login,
           c_email_address,
           d_year)
- SELECT
+ [_LIMITA] SELECT [_LIMITB]
    t_s_secyear.customer_id,
    t_s_secyear.customer_first_name,
    t_s_secyear.customer_last_name,
@@ -99,5 +100,5 @@ WITH year_total AS (
    t_s_secyear.customer_first_name,
    t_s_secyear.customer_last_name,
    t_s_secyear.customer_preferred_cust_flag
- LIMIT 100
+ [_LIMITC]
             

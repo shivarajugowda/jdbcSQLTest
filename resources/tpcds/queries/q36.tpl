@@ -1,6 +1,7 @@
 --q36.sql--
+-- define _LIMIT=100
 
- select
+ [_LIMITA] select [_LIMITB]
     sum(ss_net_profit)/sum(ss_ext_sales_price) as gross_margin
    ,i_category
    ,i_class
@@ -22,5 +23,5 @@
    lochierarchy desc
   ,case when lochierarchy = 0 then i_category end
   ,rank_within_parent
- limit 100
+ [_LIMITC]
             

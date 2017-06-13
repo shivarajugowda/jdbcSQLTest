@@ -51,11 +51,10 @@ public class JdbcDriver {
     }
 
     public String getSchema() throws SQLException {
+        //if (Config.DATABASE_CIS.equals(dbType) || Config.DATABASE_ORACLE.equals(dbType))
+        //    return null;
 
-        if (Config.DATABASE_CIS.equals(dbType))
-            return null;
-
-        return SCHEMA_NAME;
+        return conn.getSchema();
     }
     private void setSchema(Connection connection) throws SQLException {
 

@@ -145,7 +145,7 @@ public class Main {
             popd.execute();
             
             // Create Indexes and other constraints.
-            script = new SchemaScript(new File(schemaFolder, "CreateIndexes.sql"));
+            script = new TpcSchema(new File(schemaFolder, "CreateIndexes.sql"), dbType);
             ex = new TestExecutor(jdbcDriver, script);
             ex.execute();
         }
@@ -174,31 +174,37 @@ public class Main {
         if(popSchema) {
             jdbcDriver.clearSchema();  // Clear database.
             File schemaFolder = new File(testFolder, "schema");
-            List<File> files = (List<File>) FileUtils.listFiles(schemaFolder, new WildcardFileFilter("*.sql"), TrueFileFilter.INSTANCE);
-            for (File file : files) {
-                Script script = new TpcSchema(file, dbType);
-                TestExecutor ex = new TestExecutor(jdbcDriver, script);
-                ex.execute();
-            }
-            TpcdsPopulateData ex = new TpcdsPopulateData(jdbcDriver, sf);
+            
+            // Drop Tables.
+            Script scriptD = new TpcSchema(new File(schemaFolder, "DropTables.sql"), dbType);
+            TestExecutor exD = new TestExecutor(jdbcDriver, scriptD);
+            exD.execute();
+            
+            // Create Tables.
+            Script script = new TpcSchema(new File(schemaFolder, "CreateTables.sql"), dbType);
+            TestExecutor ex = new TestExecutor(jdbcDriver, script);
+            ex.execute();
+            
+            // Populate Data.
+            TpcdsPopulateData popd = new TpcdsPopulateData(jdbcDriver, sf);
+            popd.execute();
+            
+            // Create Indexes and other constraints.
+            script = new TpcSchema(new File(schemaFolder, "CreateIndexes.sql"), dbType);
+            ex = new TestExecutor(jdbcDriver, script);
             ex.execute();
         }
 
-        // Run SQL Queries
+        // Run Queries
         File sqlFolder = new File(testFolder, "queries");
         List<File> files = (List<File>) FileUtils.listFiles(sqlFolder, new WildcardFileFilter("*.tpl"), TrueFileFilter.INSTANCE);
         for (File file : files) {
-            //System.out.println("Working on " + file.getName());
-        	TpcdsQuery script = new TpcdsQuery(file, sf, dbType);
+            TpcdsQuery script = new TpcdsQuery(file, sf, props.getProperty(Config.DATABASE));
             TestExecutor ex = new TestExecutor(jdbcDriver, script);
             ex.execute();
         }
 
-        /*
-        TpcdsScript_bak script = new TpcdsScript_bak("TPCDS");
-        TestExecutor ex = new TestExecutor(jdbcDriver, script);
-        ex.execute();
-        */
     }
+    
 }
 

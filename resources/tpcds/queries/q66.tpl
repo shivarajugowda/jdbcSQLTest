@@ -1,6 +1,7 @@
 --q66.sql--
+-- define _LIMIT=100
 
- select w_warehouse_name, w_warehouse_sq_ft, w_city, w_county, w_state, w_country,
+ [_LIMITA] select [_LIMITB] w_warehouse_name, w_warehouse_sq_ft, w_city, w_county, w_state, w_country,
     ship_carriers, year
  	  ,sum(jan_sales) as jan_sales
  	  ,sum(feb_sales) as feb_sales
@@ -41,7 +42,7 @@
  from (
     (select
  	    w_warehouse_name, w_warehouse_sq_ft, w_city, w_county, w_state, w_country
- 	        ,concat('DHL', ',', 'BARIAN') as ship_carriers
+ 	        , 'DHL' || ',' || 'BARIAN' as ship_carriers
       ,d_year as year
  	    ,sum(case when d_moy = 1 then ws_ext_sales_price * ws_quantity else 0 end) as jan_sales
  	    ,sum(case when d_moy = 2 then ws_ext_sales_price * ws_quantity else 0 end) as feb_sales
@@ -81,7 +82,7 @@
       w_warehouse_name, w_warehouse_sq_ft, w_city, w_county, w_state, w_country, d_year)
  union all
     (select w_warehouse_name, w_warehouse_sq_ft, w_city, w_county, w_state, w_country
- 	        ,concat('DHL', ',', 'BARIAN') as ship_carriers
+ 	        , 'DHL' || ',' || 'BARIAN' as ship_carriers
       ,d_year as year
  	    ,sum(case when d_moy = 1 then cs_sales_price * cs_quantity else 0 end) as jan_sales
  	    ,sum(case when d_moy = 2 then cs_sales_price * cs_quantity else 0 end) as feb_sales
@@ -125,5 +126,5 @@
     w_warehouse_name, w_warehouse_sq_ft, w_city, w_county, w_state, w_country,
     ship_carriers, year
  order by w_warehouse_name
- limit 100
+ [_LIMITC]
             

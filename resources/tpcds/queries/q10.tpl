@@ -1,6 +1,7 @@
 --q10.sql--
+-- define _LIMIT=100
 
- select
+ [_LIMITA] select [_LIMITB]
   cd_gender, cd_marital_status, cd_education_status, count(*) cnt1,
   cd_purchase_estimate, count(*) cnt2, cd_credit_rating, count(*) cnt3,
   cd_dep_count, count(*) cnt4, cd_dep_employed_count,  count(*) cnt5,
@@ -43,5 +44,5 @@
           cd_dep_count,
           cd_dep_employed_count,
           cd_dep_college_count
-LIMIT 100
+[_LIMITC]
             

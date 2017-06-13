@@ -1,4 +1,5 @@
 --q47.sql--
+-- define _LIMIT=100
 
  with v1 as(
  select i_category, i_brand,
@@ -40,10 +41,10 @@
        v1.s_company_name = v1_lead.s_company_name and
        v1.rn = v1_lag.rn + 1 and
        v1.rn = v1_lead.rn - 1)
- select * from v2
+ [_LIMITA] select [_LIMITB] * from v2
  where  d_year = 1999 and
         avg_monthly_sales > 0 and
         case when avg_monthly_sales > 0 then abs(sum_sales - avg_monthly_sales) / avg_monthly_sales else null end > 0.1
  order by sum_sales - avg_monthly_sales, 3
- limit 100
+ [_LIMITC]
             

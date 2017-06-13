@@ -1,6 +1,7 @@
 --q08.sql--
+-- define _LIMIT=100
 
- select s_store_name, sum(ss_net_profit)
+ [_LIMITA] select [_LIMITB] s_store_name, sum(ss_net_profit)
  from store_sales, date_dim, store,
      (SELECT ca_zip
        from (
@@ -80,5 +81,5 @@
   and d_qoy = 2 and d_year = 1998
   and (substr(s_zip,1,2) = substr(V1.ca_zip,1,2))
  group by s_store_name
- order by s_store_name LIMIT 100
+ order by s_store_name [_LIMITC]
             

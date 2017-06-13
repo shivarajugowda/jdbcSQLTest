@@ -1,6 +1,7 @@
 --q49.sql--
+-- define _LIMIT=100
 
- select 'web' as channel, web.item, web.return_ratio, web.return_rank, web.currency_rank
+ [_LIMITA] select [_LIMITB] 'web' as channel, web.item, web.return_ratio, web.return_rank, web.currency_rank
  from (
  	select
     item, return_ratio, currency_ratio,
@@ -94,5 +95,5 @@
  ) store
  where (store.return_rank <= 10 or store.currency_rank <= 10)
  order by 1,4,5,2
- limit 100
+ [_LIMITC]
             

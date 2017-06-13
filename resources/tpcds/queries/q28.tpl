@@ -1,6 +1,7 @@
 --q28.sql--
+-- define _LIMIT=100
 
- select *
+ [_LIMITA] select [_LIMITB] *
  from (select avg(ss_list_price) B1_LP
             ,count(ss_list_price) B1_CNT
             ,count(distinct ss_list_price) B1_CNTD
@@ -49,5 +50,5 @@
         and (ss_list_price between 154 and 154+10
              or ss_coupon_amt between 7326 and 7326+1000
              or ss_wholesale_cost between 7 and 7+20)) B6
- limit 100
+ [_LIMITC]
             

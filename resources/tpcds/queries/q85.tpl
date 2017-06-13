@@ -1,6 +1,7 @@
 --q85.sql--
+-- define _LIMIT=100
 
- select
+ [_LIMITA] select [_LIMITB]
     substr(r_reason_desc,1,20), avg(ws_quantity), avg(wr_refunded_cash), avg(wr_fee)
  from web_sales, web_returns, web_page, customer_demographics cd1,
       customer_demographics cd2, customer_address, date_dim, reason
@@ -78,5 +79,5 @@
         ,avg(ws_quantity)
         ,avg(wr_refunded_cash)
         ,avg(wr_fee)
- limit 100
+ [_LIMITC]
             

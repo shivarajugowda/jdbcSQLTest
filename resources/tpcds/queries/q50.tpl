@@ -1,6 +1,7 @@
 --q50.sql--
+-- define _LIMIT=100
 
- select
+ [_LIMITA] select [_LIMITB]
     s_store_name, s_company_id, s_street_number, s_street_name, s_street_type,
     s_suite_number, s_city, s_county, s_state, s_zip
    ,sum(case when (sr_returned_date_sk - ss_sold_date_sk <= 30 ) then 1 else 0 end)  as "30 days"
@@ -28,5 +29,5 @@
   order by
      s_store_name, s_company_id, s_street_number, s_street_name, s_street_type,
      s_suite_number, s_city, s_county, s_state, s_zip
-  limit 100
+  [_LIMITC]
             

@@ -1,0 +1,101 @@
+I_CATEGORY|I_CLASS|I_BRAND|I_PRODUCT_NAME|D_YEAR|D_QOY|D_MOY|S_STORE_ID|SUMSALES|RK|
+ Books                                             |arts                                              |amalgmaxi #12                                     ||||||57150.87|35|
+ Books                                             |arts                                              |amalgmaxi #2                                      ||||||24391.01|100|
+ Books                                             |arts                                              |amalgmaxi #3                                      ||||||26447.99|88|
+ Books                                             |arts                                              |amalgmaxi #8                                      ||||||57756.37|34|
+ Books                                             |arts                                              |amalgmaxi #9                                      ||||||31758.96|75|
+ Books                                             |arts                                              |||||||206542.68|14|
+ Books                                             |business                                          |importomaxi #12                                   ||||||31118.71|77|
+ Books                                             |business                                          |importomaxi #2                                    ||||||36226.95|69|
+ Books                                             |business                                          |importomaxi #3                                    ||||||27454.69|86|
+ Books                                             |business                                          |importomaxi #8                                    ||||||27584.02|85|
+ Books                                             |business                                          |importomaxi #9                                    ||||||24527.25|98|
+ Books                                             |business                                          |||||||163312.25|17|
+ Books                                             |computers                                         |exportimaxi #12                                   ||||||52072.8|48|
+ Books                                             |computers                                         |exportimaxi #2                                    ||||||53129.81|44|
+ Books                                             |computers                                         |exportimaxi #3                                    ||||||39528.12|62|
+ Books                                             |computers                                         |exportimaxi #6                                    ||||||47543.54|55|
+ Books                                             |computers                                         |exportimaxi #9                                    ||||||29797.86|79|
+ Books                                             |computers                                         |||||||238822.34|10|
+ Books                                             |cooking                                           |amalgunivamalg #12                                ||||||48138.6|54|
+ Books                                             |cooking                                           |amalgunivamalg #2                                 ||||||33615.63|74|
+ Books                                             |cooking                                           |amalgunivamalg #3                                 ||||||79390.98|21|
+ Books                                             |cooking                                           |amalgunivamalg #8                                 ||||||26947.47|87|
+ Books                                             |cooking                                           |amalgunivamalg #9                                 ||||||29645.95|80|
+ Books                                             |cooking                                           |||||||237183.4|12|
+ Books                                             |entertainments                                    |edu packmaxi #12                                  ||||||26432.82|89|
+ Books                                             |entertainments                                    |edu packmaxi #2                                   ||||||55240.44|37|
+ Books                                             |entertainments                                    |edu packmaxi #3                                   ||||||52720.87|45|
+ Books                                             |entertainments                                    |edu packmaxi #6                                   ||||||46215.01|57|
+ Books                                             |entertainments                                    |edu packmaxi #8                                   ||||||35463.63|70|
+ Books                                             |entertainments                                    |edu packmaxi #9                                   ||||||25760.7|93|
+ Books                                             |entertainments                                    |||||||245970.73|6|
+ Books                                             |fiction                                           |scholarunivamalg #12                              ||||||24483.26|99|
+ Books                                             |fiction                                           |scholarunivamalg #2                               ||||||88769.17|19|
+ Books                                             |fiction                                           |scholarunivamalg #6                               ||||||67605.12|26|
+ Books                                             |fiction                                           |scholarunivamalg #8                               ||||||56981.36|36|
+ Books                                             |fiction                                           |scholarunivamalg #9                               ||||||53324.85|43|
+ Books                                             |fiction                                           |||||||313037.88|4|
+ Books                                             |history                                           |scholarmaxi #12                                   ||||||52531.49|47|
+ Books                                             |history                                           |scholarmaxi #2                                    ||||||55154.38|38|
+ Books                                             |history                                           |scholarmaxi #3                                    |barn stableantiought                              |2000||||25601.33|95|
+ Books                                             |history                                           |scholarmaxi #3                                    |barn stableantiought                              |||||25601.33|95|
+ Books                                             |history                                           |scholarmaxi #3                                    ||||||74641.1|23|
+ Books                                             |history                                           |scholarmaxi #6                                    ||||||46879.56|56|
+ Books                                             |history                                           |scholarmaxi #8                                    ||||||55107.62|40|
+ Books                                             |history                                           |scholarmaxi #9                                    ||||||80650.67|20|
+ Books                                             |history                                           |||||||364964.82|2|
+ Books                                             |home repair                                       |importounivamalg #2                               ||||||63081.27|30|
+ Books                                             |home repair                                       |importounivamalg #3                               ||||||26362.04|91|
+ Books                                             |home repair                                       |importounivamalg #6                               ||||||31305.49|76|
+ Books                                             |home repair                                       |importounivamalg #8                               ||||||54984.64|41|
+ Books                                             |home repair                                       |importounivamalg #9                               ||||||36754.64|66|
+ Books                                             |home repair                                       |||||||231177.44|13|
+ Books                                             |mystery                                           |corpunivamalg #12                                 ||||||25022.33|97|
+ Books                                             |mystery                                           |corpunivamalg #2                                  ||||||34143.56|73|
+ Books                                             |mystery                                           |corpunivamalg #6                                  ||||||39123.94|63|
+ Books                                             |mystery                                           |corpunivamalg #8                                  ||||||36704.08|67|
+ Books                                             |mystery                                           |corpunivamalg #9                                  ||||||30861|78|
+ Books                                             |mystery                                           |||||||181377.52|15|
+ Books                                             |parenting                                         |corpmaxi #12                                      ||||||48370.16|53|
+ Books                                             |parenting                                         |corpmaxi #2                                       ||||||28800.24|82|
+ Books                                             |parenting                                         |corpmaxi #6                                       ||||||70650.48|25|
+ Books                                             |parenting                                         |corpmaxi #9                                       ||||||66387.72|28|
+ Books                                             |parenting                                         |||||||245090.17|8|
+ Books                                             |reference                                         |brandmaxi #12                                     ||||||71835.78|24|
+ Books                                             |reference                                         |brandmaxi #2                                      ||||||50940.02|50|
+ Books                                             |reference                                         |brandmaxi #3                                      ||||||36306.38|68|
+ Books                                             |reference                                         |brandmaxi #6                                      ||||||77081.92|22|
+ Books                                             |reference                                         |brandmaxi #8                                      ||||||53471.06|42|
+ Books                                             |reference                                         |||||||312351.39|5|
+ Books                                             |romance                                           |namelessmaxi #12                                  ||||||58166.51|32|
+ Books                                             |romance                                           |namelessmaxi #2                                   ||||||48736.24|52|
+ Books                                             |romance                                           |namelessmaxi #3                                   ||||||92332.79|18|
+ Books                                             |romance                                           |namelessmaxi #6                                   ||||||58150.75|33|
+ Books                                             |romance                                           |namelessmaxi #8                                   ||||||42152.42|61|
+ Books                                             |romance                                           |namelessmaxi #9                                   ||||||42657.17|60|
+ Books                                             |romance                                           |||||||342425.19|3|
+ Books                                             |science                                           |maximaxi #12                                      ||||||28488.23|83|
+ Books                                             |science                                           |maximaxi #2                                       ||||||25608.48|94|
+ Books                                             |science                                           |maximaxi #3                                       ||||||43707.84|59|
+ Books                                             |science                                           |maximaxi #6                                       ||||||55147.5|39|
+ Books                                             |science                                           |maximaxi #8                                       ||||||50380.21|51|
+ Books                                             |science                                           |maximaxi #9                                       ||||||38724.34|64|
+ Books                                             |science                                           |||||||244719.45|9|
+ Books                                             |self-help                                         |exportiunivamalg #12                              ||||||35300.26|71|
+ Books                                             |self-help                                         |exportiunivamalg #2                               ||||||51584.52|49|
+ Books                                             |self-help                                         |exportiunivamalg #6                               ||||||67122.45|27|
+ Books                                             |self-help                                         |exportiunivamalg #9                               ||||||36943.99|65|
+ Books                                             |self-help                                         |||||||238212.74|11|
+ Books                                             |sports                                            |edu packunivamalg #2                              ||||||28023.7|84|
+ Books                                             |sports                                            |edu packunivamalg #6                              ||||||52663.05|46|
+ Books                                             |sports                                            |edu packunivamalg #8                              ||||||34617.5|72|
+ Books                                             |sports                                            |edu packunivamalg #9                              ||||||26243.38|92|
+ Books                                             |sports                                            |||||||174194.12|16|
+ Books                                             |travel                                            |univunivamalg #12                                 ||||||46058.7|58|
+ Books                                             |travel                                            |univunivamalg #2                                  ||||||29598.14|81|
+ Books                                             |travel                                            |univunivamalg #3                                  ||||||26379.15|90|
+ Books                                             |travel                                            |univunivamalg #8                                  ||||||61261.67|31|
+ Books                                             |travel                                            |univunivamalg #9                                  ||||||65155.38|29|
+ Books                                             |travel                                            |||||||245170.58|7|
+ Books                                             ||||||||3995575.51|1|

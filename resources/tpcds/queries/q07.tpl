@@ -1,6 +1,7 @@
 --q07.sql--
+-- define _LIMIT=100
 
- SELECT i_item_id,
+ [_LIMITA] SELECT [_LIMITB] i_item_id,
         avg(ss_quantity) agg1,
         avg(ss_list_price) agg2,
         avg(ss_coupon_amt) agg3,
@@ -16,5 +17,5 @@
        (p_channel_email = 'N' or p_channel_event = 'N') AND
        d_year = 2000
  GROUP BY i_item_id
- ORDER BY i_item_id LIMIT 100
+ ORDER BY i_item_id [_LIMITC]
             

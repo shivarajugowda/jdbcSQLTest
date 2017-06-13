@@ -1,0 +1,101 @@
+C_LAST_NAME|C_FIRST_NAME|CA_CITY|BOUGHT_CITY|SS_TICKET_NUMBER|AMT|PROFIT|
+ Abbott                        |Frederick           |Green Acres|Oakland|7247|518.63|-13290.67|
+ Albright                      |Vincent             |Wildwood|Oakdale|7278|4425.56|-25696.83|
+ Allen                         |Marty               |Greenwood|Riverview|1040|308.2|-1547.3|
+ Allen                         |Ronald              |Wright|Pleasant Valley|8104|24.26|-1996.98|
+ Allen                         |Warren              |Glenwood|Enterprise|6149|5197.72|-13263.97|
+ Anderson                      |Dwayne              |Plainview|Newport|4013|0|530.9|
+ Anderson                      |Nona                |Acme|Riverside|537|3844.58|-9759.31|
+ Anthony                       |Virginia            |Riverview|Marion|4612|1606.75|-15499.87|
+ Arnold                        |Brian               |Farmington|White Oak|4488|199.26|-12914.21|
+ Austin                        |Alonzo              |Cedar Grove|Pleasant Grove|7567|4404.15|-8878.23|
+ Baird                         |Cheryl              |New Hope|Riverview|4428|6652.19|-20098.03|
+ Baker                         |Kim                 |Franklin|Springdale|2035|5292.73|-9678.61|
+ Barba                         |William             |Providence|Lakeside|113|7860.44|-17630.19|
+ Barber                        |Malinda             |Unionville|Smith|5496|653.67|-4222.16|
+ Barbour                       |Bradley             |Spring Valley|Marion|3561|3771.62|-15891.04|
+ Barraza                       ||Georgetown|Cedar Grove|1251|329.25|-11840.14|
+ Beck                          |Robert              |Gladstone|Oakwood|6266|4295.31|-17145.86|
+ Beck                          |Robyn               |Lakeside|Belmont|6620|0|-1406.1|
+ Bell                          |Rhonda              |Waterloo|Jamestown|7576|1550.95|-12998.99|
+ Bernal                        |Nilda               |Fairfield|White Oak|1849|940.21|-13663.57|
+ Berry                         |Angela              |Woodland|Oakwood|7179|9366.03|-19090.04|
+ Blackmon                      |Lois                |Macedonia|Pierce|9567|3107.83|-14759.88|
+ Blake                         |Matthew             |Friendship|Wilson|8995|4904.25|-12966.92|
+ Bowen                         |Tanya               |Cedar Grove|Jamestown|8046|2184.43|-18511.86|
+ Boyd                          |Wayne               |Mount Zion|Peru|6986|603.17|-13404.34|
+ Brady                         |Andrew              |Hopewell|Riverview|5597|1135.72|1420.17|
+ Briggs                        |Herman              |Oakdale|Belmont|4290|1716.32|-7703.33|
+ Britt                         |Inez                |Appleton|Shiloh|61|24.99|-8704|
+ Brown                         |Ann                 |Riverside|Sulphur Springs|1294|0|-349.24|
+ Brown                         |Charles             |Wilson|Newtown|57|446.84|-10463.3|
+ Brown                         |Henry               |Concord|Spring Hill|3596|9821.05|-23811.33|
+ Brown                         |Robert              |Mount Vernon|Sunnyside|8985|169.15|-2675.63|
+ Brown                         |Roland              |Sunnyside|Spring Valley|2604|0|-2707.95|
+ Bryan                         |Barbara             |Lincoln|Valley View|3078|37.06|-5384.61|
+ Bryan                         |John                |Frankfort|Lakewood|2988|176.06|-18695.21|
+ Bryan                         |Rodger              |Harmony|Newport|2870|694.44|2460.24|
+ Buchanan                      |Essie               |Woodlawn|Waterloo|5207|136.01|-11024.23|
+ Burchett                      |Roy                 |Adrian|Pine Grove|3749|778.95|-2894.29|
+ Burney                        |Andrew              |Lakeview|Oak Hill|1846|196.05|-12250.41|
+ Burns                         |Roderick            |Waterville|Mount Zion|2739|76.36|-9434.67|
+ Burns                         |Ryan                |Green Acres|Antioch|7900|1095.64|-3405.06|
+ Burrows                       |Peggy               |Mount Olive|Pleasant Grove|7909|294.67|-6547.65|
+ Burton                        |David               |Highland|Morris|1572|5899.95|-12509.56|
+ Burton                        |Michael             |Valley View|Woodlawn|4604|1200.18|-18563.35|
+ Buxton                        |Roland              |Jamestown|Hillcrest|4475|2532.53|-9441.07|
+ Byrd                          |James               |Lakewood|Greenwood|1791|434.74|564.74|
+ Byrd                          |Melissa             |Centerville|Woodland|6589|5346.29|-18569.27|
+ Cameron                       |Nancy               |Riverside|Franklin|1209|3479.58|-12019.68|
+ Campbell                      |Ellen               |Macedonia|Oakland|8577|4259.9|-25517.17|
+ Campbell                      |Karen               |Deerfield|Stringtown|1882|967.3|-11181.95|
+ Caron                         |Lori                |Hillcrest|Bridgeport|5349|1107.12|-7564.09|
+ Carr                          |Randal              |New Hope|Lakewood|1213|139.96|-7087.13|
+ Carter                        |Sandra              |Oakdale|Enterprise|3838|0|-10855.86|
+ Carter                        |Warren              |Ashland|Walnut Grove|7628|815.66|-24226.87|
+ Casas                         |Susie               |Lee|Pleasant Grove|9101|1936.35|-12273.94|
+ Casey                         |Amanda              |Green Acres|Stringtown|5943|125.58|-11341.95|
+ Chaffin                       |Dorothy             |Mount Olive|Walnut Grove|9050|3465.6|-29060.6|
+ Chambers                      |Margit              |Shiloh|Walnut Grove|5083|2290.08|-11670.13|
+ Chavez                        |Mabel               |Deerfield|Johnsonville|7998|2646.35|7534.39|
+ Christensen                   |Dona                |Glendale|Greenfield|1663|914.31|-9473.09|
+ Christmas                     |Alison              |Oakland|Indian Village|3728|2908.65|-13796.15|
+ Clarke                        |Edward              |Union|Pine Grove|6441|1632.32|-8380.87|
+ Coburn                        |Nida                |Greenfield|Glenwood|3040|941.49|-6435.54|
+ Coker                         |Jonathan            |Green Acres|Mineral Springs|9488|1595.57|-9530.73|
+ Cole                          |Robert              |Cedar Grove|Maple Hill|9418|2784.3|-4786.59|
+ Coles                         |Myrtle              |Sunnyside|Florence|2083|1208.58|-7981.97|
+ Colon                         |Pablo               |Harmony|Bethel|8923|0|-7435.64|
+ Conklin                       |James               |Providence|Wilton|4489|971.34|-1026.46|
+ Conyers                       |Joseph              |White Oak|Clifton|3195|3219.24|-14746.79|
+ Cook                          |William             |Providence|Highland|3664|5395.46|-13536.68|
+ Copeland                      |Justin              |Concord|Green Acres|3928|9967.64|-19030.73|
+ Copeland                      |Richard             |Lincoln|Forest Hills|6174|3810.98|-4176.92|
+ Corcoran                      |Louis               |Providence|Hamilton|6811|6315.63|-10117.22|
+ Costa                         |David               |Bayview|Centerville|3326|1293.74|-23951.28|
+ Cowart                        |Marvin              |Buena Vista|Glendale|4502|114.54|-6332.42|
+ Cox                           |Hattie              |Woodlawn|Hopewell|623|0|-13986.74|
+ Cuevas                        |Jack                |Mountain View|Stringtown|3100|4401.31|-15707.98|
+ Cummings                      |Jason               |Sunnyside|Newport|1771|7438.91|-22374|
+ Cummings                      |Rosa                |Greenville|Green Acres|4316|3144.47|-27731.59|
+ Cunningham                    |Billy               |Jackson|Milan|2416|75.76|-10527.69|
+ Cunningham                    |Debra               |Brownsville|Wildwood|2393|9493.94|-10618.67|
+ Davis                         |Donya               |Bridgeport|Woodville|3922|0|-12338.6|
+ Davis                         |Hubert              |Edgewood|Forest Hills|7042|15.12|-17172.5|
+ Davis                         |Janet               |Riverview|Macedonia|4988|208.84|-11922.17|
+ Davis                         |Martha              |Buena Vista|Pine Grove|8745|231.8|-7746.77|
+ Davis                         |Richard             |Concord|Maple Grove|6947|1795.73|-5508.24|
+ Dawkins                       |Steven              |Sulphur Springs|Lakeside|1081|170.54|-3082.05|
+ Dean                          |Donna               |Crossroads|Mount Zion|6023|39.85|-14086.76|
+ Dehart                        |Dorothy             |Ridgeville|Frankfort|752|14.81|-8939.03|
+ Dietrich                      |Saundra             |Martinsville|Brookwood|1289|1156.85|-17162.83|
+ Dixon                         |Joe                 |Edgewood|California|5860|779.81|-19496.77|
+ Dixon                         ||Clifton|Oakland|3215|3693.76|-12209.85|
+ Dorsey                        |Lisa                |Bunker Hill|Wilson|5587|5155.4|2646.3|
+ Doss                          |Michael             |Bethel|Maple Grove|9484|7675.86|-20359.5|
+ Eaton                         |Sean                |Mountain View|Woodlawn|3112|4808.26|-10466.02|
+ Edwards                       |Sena                |Riverview|Belmont|7986|3369.78|1324.42|
+ Estrada                       |Gary                |Fairview|Shady Grove|4344|108.88|-6476.47|
+ Evans                         |Thomas              |Mount Olive|Bethel|5605|419.71|-13500.23|
+ Fenton                        ||Edgewater|Vienna|2352|932.46|-4679.93|
+ Fisher                        |Irving              |The Meadows|Unionville|5637|392.57|-2825.91|

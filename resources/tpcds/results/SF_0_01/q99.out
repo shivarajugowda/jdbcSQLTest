@@ -1,0 +1,1 @@
+SUBSTR(W_WAREHOUSE_NAME,1,20)|SM_TYPE|CC_NAME|30 days|31-60 days|61-90 days|91-120 days|>120 days|

@@ -1,6 +1,7 @@
 --q25.sql--
+-- define _LIMIT=100
 
- select i_item_id, i_item_desc, s_store_id, s_store_name,
+ [_LIMITA] select [_LIMITB] i_item_id, i_item_desc, s_store_id, s_store_name,
     sum(ss_net_profit) as store_sales_profit,
     sum(sr_net_loss) as store_returns_loss,
     sum(cs_net_profit) as catalog_sales_profit
@@ -28,5 +29,5 @@
     i_item_id, i_item_desc, s_store_id, s_store_name
  order by
     i_item_id, i_item_desc, s_store_id, s_store_name
- limit 100
+ [_LIMITC]
             

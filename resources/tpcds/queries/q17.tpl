@@ -1,6 +1,7 @@
 --q17.sql--
+-- define _LIMIT=100
 
- select i_item_id
+ [_LIMITA] select [_LIMITB] i_item_id
        ,i_item_desc
        ,s_state
        ,count(ss_quantity) as store_sales_quantitycount
@@ -30,5 +31,5 @@
    and d3.d_quarter_name in ('2001Q1','2001Q2','2001Q3')
  group by i_item_id, i_item_desc, s_state
  order by i_item_id, i_item_desc, s_state
- limit 100
+ [_LIMITC]
             

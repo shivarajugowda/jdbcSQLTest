@@ -1,0 +1,11 @@
+D_YEAR|I_CATEGORY_ID|I_CATEGORY|SUM(SS_EXT_SALES_PRICE)|
+ 2000|8|Sports                                            |13637.31|
+ 2000|3|Children                                          |11704.74|
+ 2000|7|Home                                              |10088.11|
+ 2000|10|Electronics                                       |8896.84|
+ 2000|2|Men                                               |6303.84|
+ 2000|1|Women                                             |4963.98|
+ 2000|5|Music                                             |4036.25|
+ 2000|9|Books                                             |2535.68|
+ 2000|4|Shoes                                             |1891.06|
+ 2000|6|Jewelry                                           |165.57|

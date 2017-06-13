@@ -1,4 +1,5 @@
 --q74.sql--
+-- define _LIMIT=100
 
  with year_total as (
  select
@@ -24,7 +25,7 @@
     and d_year in (2001,2001+1)
  group by
     c_customer_id, c_first_name, c_last_name, d_year)
- select
+ [_LIMITA] select [_LIMITB]
     t_s_secyear.customer_id, t_s_secyear.customer_first_name, t_s_secyear.customer_last_name
  from
     year_total t_s_firstyear, year_total t_s_secyear,
@@ -45,5 +46,5 @@
     and case when t_w_firstyear.year_total > 0 then t_w_secyear.year_total / t_w_firstyear.year_total else null end
       > case when t_s_firstyear.year_total > 0 then t_s_secyear.year_total / t_s_firstyear.year_total else null end
  order by 1, 1, 1
- limit 100
+ [_LIMITC]
             

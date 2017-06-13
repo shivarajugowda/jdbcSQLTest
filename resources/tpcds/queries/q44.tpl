@@ -1,6 +1,7 @@
 --q44.sql--
+-- define _LIMIT=100
 
- select asceding.rnk, i1.i_product_name best_performing, i2.i_product_name worst_performing
+ [_LIMITA] select [_LIMITB] asceding.rnk, i1.i_product_name best_performing, i2.i_product_name worst_performing
  from(select *
      from (select item_sk,rank() over (order by rank_col asc) rnk
            from (select ss_item_sk item_sk,avg(ss_net_profit) rank_col
@@ -30,5 +31,5 @@
    and i1.i_item_sk=asceding.item_sk
    and i2.i_item_sk=descending.item_sk
  order by asceding.rnk
- limit 100
+ [_LIMITC]
             

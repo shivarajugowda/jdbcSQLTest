@@ -1,0 +1,101 @@
+SUBSTR(W_WAREHOUSE_NAME,1,20)|SM_TYPE|WEB_NAME|30 days|31-60 days|61-90 days|91-120 days|>120 days|
+ Bad cards must make.|EXPRESS                       |site_0|42|36|44|44|0|
+ Bad cards must make.|EXPRESS                       |site_1|48|49|57|42|0|
+ Bad cards must make.|EXPRESS                       |site_2|36|42|51|43|0|
+ Bad cards must make.|EXPRESS                       |site_3|57|31|48|45|0|
+ Bad cards must make.|EXPRESS                       |site_4|40|59|50|54|0|
+ Bad cards must make.|LIBRARY                       |site_0|41|45|34|38|0|
+ Bad cards must make.|LIBRARY                       |site_1|30|33|34|26|0|
+ Bad cards must make.|LIBRARY                       |site_2|31|30|32|28|0|
+ Bad cards must make.|LIBRARY                       |site_3|33|39|26|29|0|
+ Bad cards must make.|LIBRARY                       |site_4|39|38|43|41|0|
+ Bad cards must make.|NEXT DAY                      |site_0|33|42|46|41|0|
+ Bad cards must make.|NEXT DAY                      |site_1|59|54|46|46|0|
+ Bad cards must make.|NEXT DAY                      |site_2|40|47|42|43|0|
+ Bad cards must make.|NEXT DAY                      |site_3|41|44|45|58|0|
+ Bad cards must make.|NEXT DAY                      |site_4|45|43|41|49|0|
+ Bad cards must make.|OVERNIGHT                     |site_0|40|42|33|29|0|
+ Bad cards must make.|OVERNIGHT                     |site_1|40|40|40|43|0|
+ Bad cards must make.|OVERNIGHT                     |site_2|49|32|37|31|0|
+ Bad cards must make.|OVERNIGHT                     |site_3|32|32|33|44|0|
+ Bad cards must make.|OVERNIGHT                     |site_4|34|34|24|33|0|
+ Bad cards must make.|REGULAR                       |site_0|33|50|35|39|0|
+ Bad cards must make.|REGULAR                       |site_1|25|24|28|36|0|
+ Bad cards must make.|REGULAR                       |site_2|32|31|29|33|0|
+ Bad cards must make.|REGULAR                       |site_3|35|39|32|39|0|
+ Bad cards must make.|REGULAR                       |site_4|32|43|49|40|0|
+ Bad cards must make.|TWO DAY                       |site_0|37|41|31|39|0|
+ Bad cards must make.|TWO DAY                       |site_1|50|41|48|28|0|
+ Bad cards must make.|TWO DAY                       |site_2|31|37|41|40|0|
+ Bad cards must make.|TWO DAY                       |site_3|25|22|32|32|0|
+ Bad cards must make.|TWO DAY                       |site_4|32|25|32|28|0|
+ Conventional childr|EXPRESS                       |site_0|55|48|66|39|0|
+ Conventional childr|EXPRESS                       |site_1|37|44|46|59|0|
+ Conventional childr|EXPRESS                       |site_2|43|38|40|45|0|
+ Conventional childr|EXPRESS                       |site_3|48|47|52|48|0|
+ Conventional childr|EXPRESS                       |site_4|47|56|38|55|0|
+ Conventional childr|LIBRARY                       |site_0|43|30|42|47|0|
+ Conventional childr|LIBRARY                       |site_1|39|37|45|40|0|
+ Conventional childr|LIBRARY                       |site_2|29|32|38|35|0|
+ Conventional childr|LIBRARY                       |site_3|31|35|29|35|0|
+ Conventional childr|LIBRARY                       |site_4|32|34|30|29|0|
+ Conventional childr|NEXT DAY                      |site_0|38|47|52|54|0|
+ Conventional childr|NEXT DAY                      |site_1|57|42|48|38|0|
+ Conventional childr|NEXT DAY                      |site_2|56|46|42|47|0|
+ Conventional childr|NEXT DAY                      |site_3|47|46|57|51|0|
+ Conventional childr|NEXT DAY                      |site_4|50|58|42|54|0|
+ Conventional childr|OVERNIGHT                     |site_0|28|20|26|38|0|
+ Conventional childr|OVERNIGHT                     |site_1|33|31|43|41|0|
+ Conventional childr|OVERNIGHT                     |site_2|39|32|43|28|0|
+ Conventional childr|OVERNIGHT                     |site_3|38|52|37|42|0|
+ Conventional childr|OVERNIGHT                     |site_4|28|26|39|35|0|
+ Conventional childr|REGULAR                       |site_0|33|44|29|32|0|
+ Conventional childr|REGULAR                       |site_1|37|46|29|37|0|
+ Conventional childr|REGULAR                       |site_2|36|30|32|29|0|
+ Conventional childr|REGULAR                       |site_3|41|28|34|38|0|
+ Conventional childr|REGULAR                       |site_4|36|39|41|27|0|
+ Conventional childr|TWO DAY                       |site_0|32|35|35|35|0|
+ Conventional childr|TWO DAY                       |site_1|46|43|36|48|0|
+ Conventional childr|TWO DAY                       |site_2|35|29|40|36|0|
+ Conventional childr|TWO DAY                       |site_3|44|26|25|38|0|
+ Conventional childr|TWO DAY                       |site_4|43|26|32|33|0|
+ Doors canno|EXPRESS                       |site_0|50|48|45|59|0|
+ Doors canno|EXPRESS                       |site_1|55|41|58|46|0|
+ Doors canno|EXPRESS                       |site_2|41|47|37|41|0|
+ Doors canno|EXPRESS                       |site_3|44|41|38|43|0|
+ Doors canno|EXPRESS                       |site_4|45|55|53|62|0|
+ Doors canno|LIBRARY                       |site_0|23|32|28|35|0|
+ Doors canno|LIBRARY                       |site_1|48|31|36|34|0|
+ Doors canno|LIBRARY                       |site_2|40|33|38|34|0|
+ Doors canno|LIBRARY                       |site_3|35|30|26|35|0|
+ Doors canno|LIBRARY                       |site_4|28|25|22|31|0|
+ Doors canno|NEXT DAY                      |site_0|56|44|45|48|0|
+ Doors canno|NEXT DAY                      |site_1|46|50|44|36|0|
+ Doors canno|NEXT DAY                      |site_2|35|43|42|28|0|
+ Doors canno|NEXT DAY                      |site_3|59|47|41|46|0|
+ Doors canno|NEXT DAY                      |site_4|55|40|61|49|0|
+ Doors canno|OVERNIGHT                     |site_0|39|36|41|48|0|
+ Doors canno|OVERNIGHT                     |site_1|23|34|22|30|0|
+ Doors canno|OVERNIGHT                     |site_2|38|39|41|27|0|
+ Doors canno|OVERNIGHT                     |site_3|33|34|31|35|0|
+ Doors canno|OVERNIGHT                     |site_4|36|44|36|50|0|
+ Doors canno|REGULAR                       |site_0|34|45|37|28|0|
+ Doors canno|REGULAR                       |site_1|32|45|31|39|0|
+ Doors canno|REGULAR                       |site_2|32|41|37|35|0|
+ Doors canno|REGULAR                       |site_3|26|26|34|29|0|
+ Doors canno|REGULAR                       |site_4|45|36|33|38|0|
+ Doors canno|TWO DAY                       |site_0|33|36|38|36|0|
+ Doors canno|TWO DAY                       |site_1|42|37|33|40|0|
+ Doors canno|TWO DAY                       |site_2|38|43|39|38|0|
+ Doors canno|TWO DAY                       |site_3|52|30|56|56|0|
+ Doors canno|TWO DAY                       |site_4|35|30|37|35|0|
+ Important issues liv|EXPRESS                       |site_0|40|47|43|44|0|
+ Important issues liv|EXPRESS                       |site_1|49|49|40|54|0|
+ Important issues liv|EXPRESS                       |site_2|53|51|47|46|0|
+ Important issues liv|EXPRESS                       |site_3|50|55|54|38|0|
+ Important issues liv|EXPRESS                       |site_4|59|47|45|53|0|
+ Important issues liv|LIBRARY                       |site_0|28|36|34|36|0|
+ Important issues liv|LIBRARY                       |site_1|25|25|30|23|0|
+ Important issues liv|LIBRARY                       |site_2|33|40|30|41|0|
+ Important issues liv|LIBRARY                       |site_3|32|35|32|38|0|
+ Important issues liv|LIBRARY                       |site_4|29|39|52|34|0|

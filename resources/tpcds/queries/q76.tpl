@@ -1,6 +1,7 @@
 --q76.sql--
+-- define _LIMIT=100
 
- SELECT
+ [_LIMITA] SELECT [_LIMITB]
     channel, col_name, d_year, d_qoy, i_category, COUNT(*) sales_cnt,
     SUM(ext_sales_price) sales_amt
  FROM(
@@ -29,5 +30,5 @@
       AND cs_item_sk=i_item_sk) foo
  GROUP BY channel, col_name, d_year, d_qoy, i_category
  ORDER BY channel, col_name, d_year, d_qoy, i_category
- limit 100
+ [_LIMITC]
             

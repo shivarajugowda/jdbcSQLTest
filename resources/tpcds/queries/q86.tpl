@@ -1,6 +1,7 @@
 --q86.sql--
+-- define _LIMIT=100
 
- select sum(ws_net_paid) as total_sum, i_category, i_class,
+ [_LIMITA] select [_LIMITB] sum(ws_net_paid) as total_sum, i_category, i_class,
   grouping(i_category)+grouping(i_class) as lochierarchy,
   rank() over (
  	    partition by grouping(i_category)+grouping(i_class),
@@ -17,5 +18,5 @@
    lochierarchy desc,
    case when lochierarchy = 0 then i_category end,
    rank_within_parent
- limit 100
+ [_LIMITC]
             

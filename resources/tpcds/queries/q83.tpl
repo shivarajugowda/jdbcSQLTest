@@ -1,11 +1,12 @@
 --q83.sql--
+-- define _LIMIT=100
 
  with sr_items as
   (select i_item_id item_id, sum(sr_return_quantity) sr_item_qty
    from store_returns, item, date_dim
    where sr_item_sk = i_item_sk
       and  d_date in (select d_date from date_dim where d_week_seq in
-		      (select d_week_seq from date_dim where d_date in (cast('2000-06-30' as date),cast('2000-09-27' as date),cast('2000-11-17' as date))))
+		      (select d_week_seq from date_dim where d_date in (date'2000-06-30',date'2000-09-27',date'2000-11-17')))
       and sr_returned_date_sk   = d_date_sk
    group by i_item_id),
  cr_items as
@@ -13,7 +14,7 @@
   from catalog_returns, item, date_dim
   where cr_item_sk = i_item_sk
       and d_date in (select d_date from date_dim where d_week_seq in
-		      (select d_week_seq from date_dim where d_date in (cast('2000-06-30' as date),cast('2000-09-27' as date),cast('2000-11-17' as date))))
+		      (select d_week_seq from date_dim where d_date in (date'2000-06-30',date'2000-09-27',date'2000-11-17')))
       and cr_returned_date_sk   = d_date_sk
       group by i_item_id),
  wr_items as
@@ -21,10 +22,10 @@
   from web_returns, item, date_dim
   where wr_item_sk = i_item_sk and d_date in
       (select d_date	from date_dim	where d_week_seq in
-		      (select d_week_seq from date_dim where d_date in (cast('2000-06-30' as date),cast('2000-09-27' as date),cast('2000-11-17' as date))))
+		      (select d_week_seq from date_dim where d_date in (date'2000-06-30',date'2000-09-27',date'2000-11-17')))
     and wr_returned_date_sk = d_date_sk
   group by i_item_id)
- select sr_items.item_id
+ [_LIMITA] select [_LIMITB] sr_items.item_id
        ,sr_item_qty
        ,sr_item_qty/(sr_item_qty+cr_item_qty+wr_item_qty)/3.0 * 100 sr_dev
        ,cr_item_qty
@@ -36,5 +37,5 @@
  where sr_items.item_id=cr_items.item_id
    and sr_items.item_id=wr_items.item_id
  order by sr_items.item_id, sr_item_qty
- limit 100
+ [_LIMITC]
             

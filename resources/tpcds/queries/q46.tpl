@@ -1,6 +1,7 @@
 --q46.sql--
+-- define _LIMIT=100
 
- select c_last_name, c_first_name, ca_city, bought_city, ss_ticket_number, amt,profit
+ [_LIMITA] select [_LIMITB] c_last_name, c_first_name, ca_city, bought_city, ss_ticket_number, amt,profit
  from
    (select ss_ticket_number
           ,ss_customer_sk
@@ -22,5 +23,5 @@
       and customer.c_current_addr_sk = current_addr.ca_address_sk
       and current_addr.ca_city <> bought_city
   order by c_last_name, c_first_name, ca_city, bought_city, ss_ticket_number
-  limit 100
+  [_LIMITC]
             

@@ -40,19 +40,19 @@ public class TpcQuery extends Script {
 	public TpcQuery(File file, String sf, String dbType) throws Exception {
         super(FilenameUtils.getBaseName(file.getName()));
         sql = FileUtils.readFileToString(file, "UTF-8");
-        sql = this.fixLimit(dbType, sql);
+        sql = fixLimit(dbType, sql);
         resultFile = getResultFile(file, sf); 
 	}
 	
+	@Override
     public boolean validateResults(ResultSet rs, int nrows) throws Exception {
-    	   
-    	/*
-    	//if("q15.sql".equalsIgnoreCase(name)) {
-    		writeResults(resultFile, rs);
-    		if(1==1)
-    			return false;
-    	//}
-    	*/    	
+    	 
+		/*
+    	writeResults(resultFile, rs);
+    	if(1==1)
+    		return false;
+    	*/
+		
         if (!resultFile.exists())
             return false;
 
@@ -73,7 +73,7 @@ public class TpcQuery extends Script {
             }
 
             if (resultMatchError == null) {
-                String[] tokens = s.split("\\|");
+                String[] tokens = s.split("\\|", -1);
                 for (int i = 0; i < rsmeta.getColumnCount(); i++) {
                 	String expected = tokens[i];
                 	int colType = rsmeta.getColumnType(i + 1);
@@ -82,7 +82,6 @@ public class TpcQuery extends Script {
                         resultMatchError = "Column " + rsmeta.getColumnName(i + 1) + ". DataType " + rsmeta.getColumnTypeName(i + 1) + " " + rsmeta.getColumnType(i + 1) + ". Value " + rs.getString(i + 1) + " != " + tokens[i].trim();
                         break;
                     }
-
                 }
             }
         }
@@ -129,7 +128,12 @@ public class TpcQuery extends Script {
 		return result;
 	}
 	
+	/*
+	 *  Fix Limit and other database specific changes.
+	 */
 	public String fixLimit(String dbType, String sql){
+		
+		// Fix LIMIT.
         Matcher macther = LIMIT_PATTERN.matcher(sql);
         if (macther.find()) {
             String limitRows = macther.group(1);
@@ -150,6 +154,9 @@ public class TpcQuery extends Script {
             val = val.replace("%d", limitRows);
             sql = sql.replace(LIMIT_END, val);
         }
+        
+        // Oracle's equivalent syntax for sql "EXCEPT" is "MINUS": TPC-DS q87.tpl
+        sql = sql.replaceAll(" except ", " minus ");
         return sql;
 	}
 
@@ -167,11 +174,13 @@ public class TpcQuery extends Script {
 	public static boolean checkResult(int type, String expected, Object actual, float FLOATING_POINT_DELTA) {
 		boolean resultsMatch = false;
 
-		// Check null condition, expected is always not null because of string.split().
-		if (actual == null && expected.trim().isEmpty())
-			return true;
-		else if (actual == null && !expected.trim().isEmpty())
-			return false;
+		// Check null condition, treat empty expected value as null.
+		if(actual == null) {
+			if(expected == null || expected.trim().isEmpty())
+				return true;
+			else 
+				return false;
+		}
 
 		switch (type) {
 		case Types.DECIMAL:
@@ -235,8 +244,7 @@ public class TpcQuery extends Script {
 		int numCols = rsmeta.getColumnCount();
 		for (int i = 1; i <= numCols; i++) {
 			sb.append(rsmeta.getColumnName(i));
-			if(i<numCols)
-				sb.append('|');
+			sb.append('|');
 		}
 		dataWriter.append(sb.toString());
 		
@@ -247,8 +255,7 @@ public class TpcQuery extends Script {
 				Object obj = rs.getString(i);
 				if(obj != null)
 					sb.append(obj);
-				if(i<numCols)
-					sb.append('|');
+				sb.append('|');
 			}
 			dataWriter.newLine();
 			dataWriter.append(sb.toString());

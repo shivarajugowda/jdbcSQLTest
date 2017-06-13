@@ -1,6 +1,7 @@
 --q35.sql--
+-- define _LIMIT=100
 
- select
+ [_LIMITA] select [_LIMITB]
   ca_state,
   cd_gender,
   cd_marital_status,
@@ -43,5 +44,5 @@
           cd_dep_employed_count, cd_dep_college_count
  order by ca_state, cd_gender, cd_marital_status, cd_dep_count,
           cd_dep_employed_count, cd_dep_college_count
- limit 100
+ [_LIMITC]
             

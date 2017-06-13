@@ -1,4 +1,5 @@
 --q56.sql--
+-- define _LIMIT=100
 
  with ss as (
  select i_item_id,sum(ss_ext_sales_price) total_sales
@@ -39,7 +40,7 @@
  and     ws_bill_addr_sk         = ca_address_sk
  and     ca_gmt_offset           = -5
  group by i_item_id)
- select i_item_id ,sum(total_sales) total_sales
+ [_LIMITA] select [_LIMITB] i_item_id ,sum(total_sales) total_sales
  from  (select * from ss
         union all
         select * from cs
@@ -47,5 +48,5 @@
         select * from ws) tmp1
  group by i_item_id
  order by total_sales, i_item_id
- limit 100
+ [_LIMITC]
             

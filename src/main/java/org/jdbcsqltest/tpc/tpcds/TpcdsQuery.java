@@ -1,10 +1,5 @@
 package org.jdbcsqltest.tpc.tpcds;
 
-import net.hydromatic.tpcds.query.Query;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
-import org.jdbcsqltest.Script;
 import org.jdbcsqltest.tpc.TpcQuery;
 
 import java.io.BufferedReader;
@@ -14,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
 
 /**
@@ -26,16 +20,16 @@ public class TpcdsQuery extends TpcQuery {
 
     private static final String[] DISABLED_IDS = {
        // ROLLUP.
-       "q05", "q14", "q18", "q22", "q27", "q36", "q67", "q70", "q77", "q80", "q86",
+       //"q05", "q14a", "q18", "q22", "q27", "q36", "q67", "q70", "q77", "q80", "q86",
 
-       // Incorrect results
-       //"q30", "q78",
+       // Postgres:  Slow or haven't finished.
+       //"q01", "q04", "q06", "q10", "q11", "q35", "q47", "q57", "q74", "q81",
 
-       // TOO Slow or haven't finished.
-       "q01", "q04", "q06", "q10", "q11", "q35", "q47", "q57", "q74", "q81",
-
-       // 100+ secs.
-       //"q95",
+    	// Oracle slow ones.
+    	//"q04", "q11", "q14a", "q25", "q65", "q69",
+    	
+    	// All Incorrect Results.
+    	//"q14b", "q23a", "q23b", "q35",
 
     };
     public static final Set<String> DISABLED_IDS_SET = new HashSet<String>(Arrays.asList(DISABLED_IDS));
@@ -45,16 +39,17 @@ public class TpcdsQuery extends TpcQuery {
     }
 
     public SqlCommand getNextSQLCommand() {
-        if (nextPtr > 0 || DISABLED_IDS_SET.contains(this.getName()))
+        if (nextPtr > 0 || (!DISABLED_IDS_SET.contains(this.getName())))
             return null;
 
+        //if (!"q78".equalsIgnoreCase(name))
+        //    return null;
         /*
-        String numStr = this.getName().substring(1,3);
-        int num = Integer.valueOf(numStr);
-        if (num != 35)
+        String str = name.substring(1, 2);
+        int num = Integer.valueOf(str);
+        if (num < 7)
             return null;
-         */
-        
+        */
         nextPtr++;
         return new SqlCommand(this.getName(), sql);
     }
@@ -121,7 +116,7 @@ public class TpcdsQuery extends TpcQuery {
             int colLength = header[i].length();
             try {
                 String val = line.substring(start, Math.min(start + colLength, line.length())).trim();
-                values[i] = "%".equalsIgnoreCase(val) ? null : val;
+                values[i] = "%".equalsIgnoreCase(val) ? "" : val;
             } catch (Throwable t){
                 throw new IllegalStateException(t);
             }

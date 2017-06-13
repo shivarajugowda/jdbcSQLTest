@@ -1,6 +1,7 @@
 --q65.sql--
+-- define _LIMIT=100
 
- select
+ [_LIMITA] select [_LIMITB]
 	  s_store_name, i_item_desc, sc.revenue, i_current_price, i_wholesale_cost, i_brand
  from store, item,
      (select ss_store_sk, avg(revenue) as ave
@@ -20,5 +21,5 @@
        s_store_sk = sc.ss_store_sk and
        i_item_sk = sc.ss_item_sk
  order by s_store_name, i_item_desc
- limit 100
+ [_LIMITC]
             

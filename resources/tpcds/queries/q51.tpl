@@ -1,4 +1,5 @@
 --q51.sql--
+-- define _LIMIT=100
 
  WITH web_v1 as (
  select
@@ -20,7 +21,7 @@
    and d_month_seq between 1200 and 1200+11
    and ss_item_sk is not NULL
  group by ss_item_sk, d_date)
- select *
+ [_LIMITA] select [_LIMITB] *
  from (select item_sk, d_date, web_sales, store_sales
       ,max(web_sales)
           over (partition by item_sk order by d_date rows between unbounded preceding and current row) web_cumulative
@@ -35,5 +36,5 @@
            )x )y
  where web_cumulative > store_cumulative
  order by item_sk, d_date
- limit 100
+ [_LIMITC]
             

@@ -1,6 +1,7 @@
 --q26.sql--
+-- define _LIMIT=100
 
- select i_item_id,
+ [_LIMITA] select [_LIMITB] i_item_id,
         avg(cs_quantity) agg1,
         avg(cs_list_price) agg2,
         avg(cs_coupon_amt) agg3,
@@ -17,5 +18,5 @@
        d_year = 2000
  group by i_item_id
  order by i_item_id
- limit 100
+ [_LIMITC]
             

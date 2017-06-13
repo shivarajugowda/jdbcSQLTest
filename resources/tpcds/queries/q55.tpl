@@ -1,6 +1,7 @@
 --q55.sql--
+-- define _LIMIT=100
 
-select i_brand_id brand_id, i_brand brand,
+[_LIMITA] select [_LIMITB] i_brand_id brand_id, i_brand brand,
  	sum(ss_ext_sales_price) ext_price
  from date_dim, store_sales, item
  where d_date_sk = ss_sold_date_sk
@@ -10,5 +11,5 @@ select i_brand_id brand_id, i_brand brand,
  	and d_year=1999
  group by i_brand, i_brand_id
  order by ext_price desc, brand_id
- limit 100
+ [_LIMITC]
             

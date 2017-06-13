@@ -1,6 +1,7 @@
 --q15.sql--
+-- define _LIMIT=100
 
- select ca_zip, sum(cs_sales_price)
+ [_LIMITA] select [_LIMITB] ca_zip, sum(cs_sales_price)
  from catalog_sales, customer, customer_address, date_dim
  where cs_bill_customer_sk = c_customer_sk
  	and c_current_addr_sk = ca_address_sk
@@ -12,5 +13,5 @@
  	and d_qoy = 2 and d_year = 2001
  group by ca_zip
  order by ca_zip
- limit 100
+ [_LIMITC]
             

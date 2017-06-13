@@ -1,6 +1,7 @@
 --q72.sql--
+-- define _LIMIT=100
 
- select i_item_desc
+ [_LIMITA] select [_LIMITB] i_item_desc
        ,w_warehouse_name
        ,d1.d_week_seq
        ,sum(case when p_promo_sk is null then 1 else 0 end) no_promo
@@ -25,5 +26,5 @@
    and cd_marital_status = 'D'
  group by i_item_desc,w_warehouse_name,d1.d_week_seq
  order by total_cnt desc, i_item_desc, w_warehouse_name, d1.d_week_seq
- limit 100
+ [_LIMITC]
             

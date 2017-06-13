@@ -1,6 +1,7 @@
 --q99.sql--
+-- define _LIMIT=100
 
- select
+ [_LIMITA] select [_LIMITB]
     substr(w_warehouse_name,1,20), sm_type, cc_name
    ,sum(case when (cs_ship_date_sk - cs_sold_date_sk <= 30 ) then 1 else 0 end)  as "30 days"
    ,sum(case when (cs_ship_date_sk - cs_sold_date_sk > 30) and
@@ -21,5 +22,5 @@
  group by
     substr(w_warehouse_name,1,20), sm_type, cc_name
  order by substr(w_warehouse_name,1,20), sm_type, cc_name
- limit 100
+ [_LIMITC]
             

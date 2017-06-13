@@ -1,6 +1,7 @@
 --q41.sql--
+-- define _LIMIT=100
 
- select distinct(i_product_name)
+ [_LIMITA] select [_LIMITB] distinct(i_product_name)
  from item i1
  where i_manufact_id between 738 and 738+40
    and (select count(*) as item_cnt
@@ -48,5 +49,5 @@
         (i_size = 'medium' or i_size = 'extra large')
         )))) > 0
  order by i_product_name
- limit 100
+ [_LIMITC]
             

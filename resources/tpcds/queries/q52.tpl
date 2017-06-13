@@ -1,6 +1,7 @@
 --q52.sql--
+-- define _LIMIT=100
 
- select dt.d_year
+ [_LIMITA] select [_LIMITB] dt.d_year
  	,item.i_brand_id brand_id
  	,item.i_brand brand
  	,sum(ss_ext_sales_price) ext_price
@@ -12,5 +13,5 @@
     and dt.d_year=2000
  group by dt.d_year, item.i_brand, item.i_brand_id
  order by dt.d_year, ext_price desc, brand_id
-limit 100
+[_LIMITC]
             

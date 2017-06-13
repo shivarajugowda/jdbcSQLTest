@@ -1,6 +1,7 @@
 --q53.sql--
+-- define _LIMIT=100
 
- select * from
+ [_LIMITA] select [_LIMITB] * from
    (select i_manufact_id,
            sum(ss_sales_price) sum_sales,
            avg(sum(ss_sales_price)) over (partition by i_manufact_id) avg_quarterly_sales
@@ -26,5 +27,5 @@
  order by avg_quarterly_sales,
   	 sum_sales,
  	 i_manufact_id
- limit 100
+ [_LIMITC]
             

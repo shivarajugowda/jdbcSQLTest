@@ -1,6 +1,7 @@
 --q62.sql--
+-- define _LIMIT=100
 
- select
+ [_LIMITA] select [_LIMITB]
    substr(w_warehouse_name,1,20)
   ,sm_type
   ,web_name
@@ -24,5 +25,5 @@
     substr(w_warehouse_name,1,20), sm_type, web_name
  order by
     substr(w_warehouse_name,1,20), sm_type, web_name
- limit 100
+ [_LIMITC]
             

@@ -1,6 +1,7 @@
 --q61.sql--
+-- define _LIMIT=100
 
- select promotions,total,cast(promotions as decimal(15,4))/cast(total as decimal(15,4))*100
+ [_LIMITA] select [_LIMITB] promotions,total,cast(promotions as decimal(15,4))/cast(total as decimal(15,4))*100
  from
    (select sum(ss_ext_sales_price) promotions
      from  store_sales, store, promotion, date_dim, customer, customer_address, item
@@ -29,5 +30,5 @@
      and   d_year = 1998
      and   d_moy  = 11) all_sales
  order by promotions, total
- limit 100
+ [_LIMITC]
             

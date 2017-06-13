@@ -1,6 +1,7 @@
 --q27.sql--
+-- define _LIMIT=100
 
- select i_item_id,
+ [_LIMITA] select [_LIMITB] i_item_id,
         s_state, grouping(s_state) g_state,
         avg(ss_quantity) agg1,
         avg(ss_list_price) agg2,
@@ -18,5 +19,5 @@
        s_state in ('TN','TN', 'TN', 'TN', 'TN', 'TN')
  group by rollup (i_item_id, s_state)
  order by i_item_id, s_state
- limit 100
+ [_LIMITC]
             
