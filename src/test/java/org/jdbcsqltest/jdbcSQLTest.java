@@ -32,33 +32,34 @@ public class jdbcSQLTest {
         
         props.put(Config.DATABASE,               Config.DATABASE_SQL_SERVER);
         props.put(Config.JDBC_DRIVER_CLASSNAME,  "com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        props.put(Config.JDBC_URL,               "jdbc:sqlserver://172.23.7.242:1433;databaseName=devstd");
+        props.put(Config.JDBC_URL,               "jdbc:sqlserver://localhost:1433;databaseName=devstd");
         props.put(Config.JDBC_USER,              "dev1");
-        props.put(Config.JDBC_PASSWORD,          "password");
+        props.put(Config.JDBC_PASSWORD,          "");
         	
         props.put(Config.DATABASE,               Config.DATABASE_CIS);
         props.put(Config.JDBC_DRIVER_CLASSNAME,  "cs.jdbc.driver.CompositeDriver");
         props.put(Config.JDBC_URL,               "jdbc:compositesw:dbapi@localhost:9401?domain=composite&dataSource=testDS&connectTimeout=300");
         props.put(Config.JDBC_USER,              "admin");
-        props.put(Config.JDBC_PASSWORD,          "admin"); 
+        props.put(Config.JDBC_PASSWORD,          ""); 
                 
         props.put(Config.DATABASE,               Config.DATABASE_DB2);
         props.put(Config.JDBC_DRIVER_CLASSNAME,  "com.ibm.db2.jcc.DB2Driver");
-        props.put(Config.JDBC_URL,               "jdbc:db2://172.23.7.214:50000/sample");
+        props.put(Config.JDBC_URL,               "jdbc:db2://localhost:50000/sample");
         props.put(Config.JDBC_USER,              "dev1");
-        props.put(Config.JDBC_PASSWORD,          "password");
+        props.put(Config.JDBC_PASSWORD,          "");
+
         
         props.put(Config.DATABASE,                Config.DATABASE_ORACLE);
         props.put(Config.JDBC_DRIVER_CLASSNAME,  "oracle.jdbc.OracleDriver");
-        props.put(Config.JDBC_URL,               "jdbc:oracle:thin:@dvbu-ora1:11521:OR11G01");
+        props.put(Config.JDBC_URL,               "jdbc:oracle:thin:@localhost:11521:OR11G01");
         props.put(Config.JDBC_USER,              "test");
-        props.put(Config.JDBC_PASSWORD,          "password");  
-                
-        props.put(Config.DATABASE,                Config.DATABASE_PGSQL);
-        props.put(Config.JDBC_DRIVER_CLASSNAME,  "org.postgresql.Driver");
-        props.put(Config.JDBC_URL,               "jdbc:postgresql://localhost:15432/TPCH");
-        props.put(Config.JDBC_USER,              "user1");
-        props.put(Config.JDBC_PASSWORD,          "user1"); 
+        props.put(Config.JDBC_PASSWORD,          ""); 
+               
+		props.put(Config.DATABASE,                Config.DATABASE_PGSQL);
+		props.put(Config.JDBC_DRIVER_CLASSNAME,  "org.postgresql.Driver");
+		props.put(Config.JDBC_URL,               "jdbc:postgresql://localhost:15432/TPCH");
+		props.put(Config.JDBC_USER,              "user1");
+		props.put(Config.JDBC_PASSWORD,          "user1"); 
         
         return props;
     }
@@ -117,7 +118,7 @@ public class jdbcSQLTest {
         // Test type.
         props.put(Config.TEST_TYPE,   Config.TEST_TYPE_TPCDS);
         props.put(Config.RESOURCES_FOLDER, "./resources/tpcds");
-        props.put(Config.SCALE_FACTOR, Config.SCALE_FACTOR_1);
+        props.put(Config.SCALE_FACTOR, Config.SCALE_FACTOR_0_01);
         props.put(Config.POPULATE_SCHEMA, false);
 
         Main.Main(props);

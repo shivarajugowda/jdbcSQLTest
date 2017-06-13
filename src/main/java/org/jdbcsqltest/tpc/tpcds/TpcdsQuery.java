@@ -23,7 +23,7 @@ public class TpcdsQuery extends TpcQuery {
        //"q05", "q14a", "q18", "q22", "q27", "q36", "q67", "q70", "q77", "q80", "q86",
 
        // Postgres:  Slow or haven't finished.
-       //"q01", "q04", "q06", "q10", "q11", "q35", "q47", "q57", "q74", "q81",
+       "q01", "q04", "q06", "q10", "q11", "q35", "q47", "q57", "q74", "q81",
 
     	// Oracle slow ones.
     	//"q04", "q11", "q14a", "q25", "q65", "q69",
@@ -39,7 +39,7 @@ public class TpcdsQuery extends TpcQuery {
     }
 
     public SqlCommand getNextSQLCommand() {
-        if (nextPtr > 0 || (!DISABLED_IDS_SET.contains(this.getName())))
+        if (nextPtr > 0 || (DISABLED_IDS_SET.contains(this.getName())))
             return null;
 
         //if (!"q78".equalsIgnoreCase(name))
