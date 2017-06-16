@@ -32,8 +32,8 @@
  where (web.return_rank <= 10 or web.currency_rank <= 10)
  union
  select
-    'catalog' as channel, catalog.item, catalog.return_ratio,
-    catalog.return_rank, catalog.currency_rank
+    'catalog' as channel, "catalog".item, "catalog".return_ratio,
+    "catalog".return_rank, "catalog".currency_rank
  from (
  	select
     item, return_ratio, currency_ratio,
@@ -61,8 +61,8 @@
                          and d_moy = 12
                  group by cs.cs_item_sk
  	) in_cat
- ) catalog
- where (catalog.return_rank <= 10 or catalog.currency_rank <=10)
+ ) "catalog"
+ where ("catalog".return_rank <= 10 or "catalog".currency_rank <=10)
  union
  select
     'store' as channel, store.item, store.return_ratio,

@@ -40,7 +40,7 @@ public class TpcQuery extends Script {
 	public TpcQuery(File file, String sf, String dbType) throws Exception {
         super(FilenameUtils.getBaseName(file.getName()));
         sql = FileUtils.readFileToString(file, "UTF-8");
-        sql = fixLimit(dbType, sql);
+        sql = fixSQL(dbType, sql);
         resultFile = getResultFile(file, sf); 
 	}
 	
@@ -130,7 +130,7 @@ public class TpcQuery extends Script {
 	/*
 	 *  Fix Limit and other database specific changes.
 	 */
-	public String fixLimit(String dbType, String sql){
+	public String fixSQL(String dbType, String sql){
 		
 		// Fix LIMIT.
         Matcher macther = LIMIT_PATTERN.matcher(sql);
@@ -155,7 +155,9 @@ public class TpcQuery extends Script {
         }
         
         // Oracle's equivalent syntax for sql "EXCEPT" is "MINUS": TPC-DS q87.tpl
-        sql = sql.replaceAll(" except ", " minus ");
+        if(Config.DATABASE_ORACLE.equalsIgnoreCase(dbType))
+        	sql = sql.replaceAll(" except ", " minus ");
+        
         return sql;
 	}
 
